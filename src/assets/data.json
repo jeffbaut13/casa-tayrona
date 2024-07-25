@@ -1,0 +1,60 @@
+[
+    {
+      "id": 1,
+      "title": "Terraza",
+      "videoSrc": "./assets/playa.mp4",
+      "images": ["./assets/fotoTarjeta.jpg", "./assets/fotoTarjeta.jpg"],
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nunc nunc, hendrerit ac feugiat in, pulvinar at est. Proin suscipit ante ac augue fermentum placerat. Ut rhoncus ut quam ac imperdiet. Vivamus pretium fringilla nisi, sit amet dictum eros fringilla in. Aliquam posuere risus in purus ultricies molestie. Morbi accumsan metus ut purus tristique rutrum. Duis malesuada facilisis lacus vel viverra. Aliquam erat volutpat."
+    },
+    {
+      "id": 2,
+      "title": "Habitación Secundaria",
+      "videoSrc": "./assets/habitacion.mp4",
+      "images": ["./assets/fotoHabitacion1.jpg", "./assets/fotoHabitacion2.jpg"],
+      "description": "Descripción de la habitación principal."
+    },
+    {
+        "id": 3,
+        "title": "Cocina",
+        "videoSrc": "./assets/habitacion.mp4",
+        "images": ["./assets/fotoHabitacion1.jpg", "./assets/fotoHabitacion2.jpg"],
+        "description": "Descripción de la habitación principal."
+      },
+      {
+        "id": 4,
+        "title": "Piscinas",
+        "videoSrc": "./assets/habitacion.mp4",
+        "images": ["./assets/fotoHabitacion1.jpg", "./assets/fotoHabitacion2.jpg"],
+        "description": "Descripción de la habitación principal."
+      },
+      {
+        "id": 5,
+        "title": "Habitacion principal",
+        "videoSrc": "./assets/habitacion.mp4",
+        "images": ["./assets/fotoHabitacion1.jpg", "./assets/fotoHabitacion2.jpg"],
+        "description": "Descripción de la habitación principal."
+      },
+      {
+        "id": 6,
+        "title": "Comedor",
+        "videoSrc": "./assets/habitacion.mp4",
+        "images": ["./assets/fotoHabitacion1.jpg", "./assets/fotoHabitacion2.jpg"],
+        "description": "Descripción de la habitación principal."
+      },
+      {
+        "id": 7,
+        "title": "Tercera habitacion",
+        "videoSrc": "./assets/habitacion.mp4",
+        "images": ["./assets/fotoHabitacion1.jpg", "./assets/fotoHabitacion2.jpg"],
+        "description": "Descripción de la habitación principal."
+      },
+      {
+        "id": 8,
+        "title": "Rio y playa",
+        "videoSrc": "./assets/habitacion.mp4",
+        "images": ["./assets/fotoHabitacion1.jpg", "./assets/fotoHabitacion2.jpg"],
+        "description": "Descripción de la habitación principal."
+      }
+    
+  ]
+  

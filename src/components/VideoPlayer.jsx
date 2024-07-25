@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import Menu from "./Menu";
+import Terraza from "./Tarjeta";
 
 const VideoPlayer = ({ videoSrc, setStarted, started, play }) => {
   const videoRef = useRef(null);
@@ -86,7 +87,9 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play }) => {
           </button>
         </div>
       )}
+       <Terraza />
       <Menu />
+     
     </div>
   );
 };

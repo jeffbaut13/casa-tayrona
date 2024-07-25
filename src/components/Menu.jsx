@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { gsap } from "gsap";
 import HamburgesaIcon from "./HamburguesaIcon";
 
+
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = React.useRef(null);
   const [hover, setHover] = useState(false);
   const [active, setActive] = useState(false);
-
-  console.log(hover);
 
   const handleClick = () => {
     setActive((prevActive) => !prevActive);
@@ -30,12 +29,14 @@ const Menu = () => {
     <div
       className="relative z-50"
       onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      onMouseLeave={() => {
+        setHover(false);
+      }}
     >
       <div
         ref={menuRef}
         className={`fixed top-0 right-0 h-screen bg-[#6b728030] hover:bg-[#fffdf8] text-[#623e2a] transition-width duration-500 ease-out overflow-hidden ${
-          isOpen ? "w-[400px]" : "w-[100px]"
+          isOpen ? "w-[400px] bg-[#fffdf8]" : "w-[100px]"
         }`}
       >
         <div
@@ -45,35 +46,27 @@ const Menu = () => {
           <HamburgesaIcon handleClick={handleClick} active={active} />
         </div>
 
-        {/* Menu items shown only when hover */}
-        <div
-          className={`absolute top-1/2 right-0 transition-all duration-300 ease-out ${
-            isOpen || hover
-              ? "opacity-100 translate-x-0"
-              : "opacity-0 -translate-x-full"
-          }`}
-          style={{ width: "100px" }}
-        >
-          {isOpen ? (
-            <div></div>
-          ) : (
-            <div className="flex items-center mt-10 -rotate-90">
-              <a
-                href="#contacto"
-                className="block hover:text-[#0090b2] transition-colors px-2"
-              >
-                Contacto
-              </a>
-              y
-              <a
-                href="#reserva"
-                className="block hover:text-[#0090b2] transition-colors px-2"
-              >
-                Reserva
-              </a>
-            </div>
-          )}
-        </div>
+        {/* Texts when hover */}
+        {!isOpen && hover && (
+          <div
+            className="absolute top-1/2 right-0 flex items-center justify-center -rotate-90 w-full"
+            
+          >
+            <a
+              href="#contacto"
+              className="block hover:text-[#0090b2] transition-colors pl-4"
+            >
+              Contacto 
+            </a>
+            <p className="pl-4">y</p>
+            <a
+              href="#reserva"
+              className="block hover:text-[#0090b2] transition-colors pl-4"
+            >
+              Reserva
+            </a>
+          </div>
+        )}
 
         {/* Buttons in expanded menu */}
         {isOpen && (
@@ -84,7 +77,7 @@ const Menu = () => {
                 href="#section2"
                 className="hover:text-[#0090b2] transition-colors mt-4 pl-4"
               >
-                Habitacion principal
+                Habitación principal
               </a>
               <a
                 href="#section2"
