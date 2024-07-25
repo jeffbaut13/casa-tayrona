@@ -8,8 +8,6 @@ const Menu = () => {
   const [hover, setHover] = useState(false);
   const [active, setActive] = useState(false);
 
-  console.log(hover);
-
   const handleClick = () => {
     setActive((prevActive) => !prevActive);
   };

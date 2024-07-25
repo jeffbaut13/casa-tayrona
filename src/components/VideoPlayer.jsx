@@ -2,31 +2,22 @@ import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import Menu from "./Menu";
 import { Button } from "./ui/Button";
+import { togglePlay } from "../helpers/helper";
 
 const tiempo = [
-  { terraza: [4, 10] },
-  { habitacionSecundaria: [14, 20] },
-  { cocina: [23, 29] },
-  { piscina: [34, 39] },
-  { habitacionprincipal: [52, 56] },
-  { comedor: [63, 66] },
-  { habitacionAuxiliar: [70, 72] },
-  { playa: [86, 90] },
+  { Terraza: [4, 10] },
+  { Habitacion_secundaria: [14, 20] },
+  { Cocina: [23, 29] },
+  { Piscina: [34, 39] },
+  { Habitacion_principal: [52, 56] },
+  { Comedor: [63, 66] },
+  { Habitacion_auxiliar: [70, 72] },
+  { Playa: [86, 90] },
 ];
-
-const diferencias = tiempo.map((obj) => {
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      return obj[key][1] - obj[key][0];
-    }
-  }
-});
 
 const nombres = tiempo.map((obj) => Object.keys(obj)[0]);
 
-const sumaTotal = diferencias.reduce((acc, curr) => acc + curr, 0);
-
-const VideoPlayer = ({ videoSrc, setStarted, started, play }) => {
+const VideoPlayer = ({ videoSrc, setStarted, started, play, setPlay }) => {
   const videoRef = useRef(null);
   const refs = useRef(
     nombres.reduce((acc, value) => {
@@ -56,13 +47,13 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play }) => {
       gsap.to(buttonRef.current, {
         opacity: 1,
         translateX: "100%",
-        duration: 1,
+        duration: 0.5,
         delay: start,
         onComplete: () => {
           gsap.to(buttonRef.current, {
             opacity: 0,
             translateX: "-100%",
-            duration: 2,
+            duration: 1,
             delay: sumaTotal - start,
           });
         },
@@ -88,11 +79,16 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play }) => {
   useEffect(() => {
     if (play) {
       videoRef.current.play();
+    } else {
+      videoRef.current.pause();
     }
   }, [play]);
 
-  const handle = (e) => {
-    alert(e);
+  const handleCards = (e) => {
+    setPlay(false);
+
+    //Funcion para abrir informacion de cada
+    console.log(e);
   };
 
   return (
@@ -107,13 +103,16 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play }) => {
       />
 
       {started && (
-        <div className="z-20 absolute top-0 left-0 w-full h-full">
+        <div
+          onClick={() => togglePlay(play, setPlay)}
+          className="z-20 absolute top-0 left-0 w-full h-full"
+        >
           {nombres.map((nombre, index) => (
             <Button
-              handleclick={() => handle(nombre)}
+              handleclick={() => handleCards(nombre)}
               key={index}
               buRef={refs.current[nombre]}
-              title={nombre}
+              title={nombre.replace(/_/g, " ")}
             />
           ))}
         </div>

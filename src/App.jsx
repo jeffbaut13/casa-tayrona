@@ -10,8 +10,8 @@ const App = () => {
   const [started, setStarted] = useState(false);
   const [loading, setloading] = useState(true);
 
-  console.log("el video esta en play? " + play);
-  console.log("el video esta " + started);
+  /*  console.log("el video esta en play? " + play);
+  console.log("el video esta " + started); */
 
   return (
     <>
@@ -20,6 +20,7 @@ const App = () => {
       )}
 
       <VideoPlayer
+        setPlay={setPlay}
         videoSrc={videoCasa}
         setStarted={setStarted}
         started={started}
