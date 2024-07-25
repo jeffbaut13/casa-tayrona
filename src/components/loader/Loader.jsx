@@ -4,7 +4,7 @@ import Lottie from "lottie-react";
 import loader from "../../lotties/logo.json";
 import gsap from "gsap";
 
-export const Loader = ({ setPlay, started }) => {
+export const Loader = ({ setPlay, started, setloading }) => {
   //const [animationPlayed, setAnimationPlayed] = useState(false);
   const container = useRef();
   useGSAP(
@@ -56,6 +56,9 @@ export const Loader = ({ setPlay, started }) => {
       duration: 2,
       ease: "power1.inOut",
     });
+    tl.add(() => {
+      setloading(false);
+    });
   };
 
   return (
@@ -63,12 +66,12 @@ export const Loader = ({ setPlay, started }) => {
       ref={container}
       className="w-full h-full flex flex-col justify-evenly items-center absolute top-0 left-0 z-10"
     >
-      <div className="background fixed top-0 left-0 bg-[--bg] w-screen h-screen z-10" />
+      <div className="background pointer-events-none fixed top-0 left-0 bg-[--bg] w-screen h-screen z-10" />
       <div />
       <Lottie loop={false} className="LoadIcon  z-20" animationData={loader} />
 
       <button
-        onClick={started && handleLoading}
+        onClick={started ? handleLoading : null}
         className="btnInicio flex justify-center items-center blackerMedium z-20  text-[--primary] border-2 border-[--primary] py-1 px-16 text-xl"
       >
         {!started ? (

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
-import Menu from './Menu';
+import Menu from "./Menu";
 
 const VideoPlayer = ({ videoSrc, setStarted, started, play }) => {
   const videoRef = useRef(null);
@@ -12,9 +12,6 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play }) => {
 
     const handleLoadedData = () => {
       setStarted(true);
-      if (isPlaying) {
-        video.play();
-      }
     };
 
     video.addEventListener("loadeddata", handleLoadedData);
