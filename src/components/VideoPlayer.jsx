@@ -3,21 +3,36 @@ import { gsap } from 'gsap';
 
 const VideoPlayer = ({ videoSrc, setStarted, started }) => {
   const videoRef = useRef(null);
+  const canvasRef = useRef(null);
   const terrazaButtonRef = useRef(null);
   const habitacionButtonRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
 
     const handleLoadedData = () => {
       setStarted(true);
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      drawFrame();
+    };
+
+    const drawFrame = () => {
+      if (!video.paused && !video.ended) {
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        requestAnimationFrame(drawFrame);
+      }
     };
 
     video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('play', drawFrame);
 
     return () => {
       video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('play', drawFrame);
     };
   }, [setStarted]);
 
@@ -61,24 +76,25 @@ const VideoPlayer = ({ videoSrc, setStarted, started }) => {
 
   return (
     <div className="relative">
-      <video ref={videoRef} src={videoSrc} className="w-full" />
+      <video ref={videoRef} src={videoSrc} className="hidden" />
+      <canvas ref={canvasRef} className="w-full" />
 
       {started && (
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-          <button
-            ref={terrazaButtonRef}
-            className="absolute left-10 top-10 opacity-0 bg-green-500 text-white px-4 py-2 rounded pointer-events-auto"
-          >
-            Terraza
-          </button>
+        <button
+          ref={terrazaButtonRef}
+          className="absolute left-10 top-10 opacity-0 bg-green-500 text-white px-4 py-2 rounded pointer-events-auto"
+        >
+          Terraza
+        </button>
+      )}
 
-          <button
-            ref={habitacionButtonRef}
-            className="absolute left-10 top-20 opacity-0 bg-red-500 text-white px-4 py-2 rounded pointer-events-auto"
-          >
-            Habitación
-          </button>
-        </div>
+      {started && (
+        <button
+          ref={habitacionButtonRef}
+          className="absolute left-10 top-20 opacity-0 bg-red-500 text-white px-4 py-2 rounded pointer-events-auto"
+        >
+          Habitación
+        </button>
       )}
 
       {!isPlaying && (
