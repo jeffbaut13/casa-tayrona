@@ -2,21 +2,25 @@ import React, { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 
 const VideoPlayer = ({ videoSrc, setStarted, started }) => {
-  const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const terrazaButtonRef = useRef(null);
   const habitacionButtonRef = useRef(null);
+  const videoElement = useRef(document.createElement('video'));
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    const video = videoRef.current;
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
+    const video = videoElement.current;
+
+    // Set up video source and event listeners
+    video.src = videoSrc;
+    video.crossOrigin = 'anonymous'; // To handle CORS issues if video is from another domain
 
     const handleLoadedData = () => {
       setStarted(true);
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
+      canvas.width = video.videoWidth || canvas.clientWidth;
+      canvas.height = video.videoHeight || canvas.clientHeight;
       drawFrame();
     };
 
@@ -38,7 +42,7 @@ const VideoPlayer = ({ videoSrc, setStarted, started }) => {
 
   useEffect(() => {
     if (isPlaying) {
-      const video = videoRef.current;
+      const video = videoElement.current;
 
       const showButton = (buttonRef, start, end) => {
         gsap.to(buttonRef.current, {
@@ -71,13 +75,12 @@ const VideoPlayer = ({ videoSrc, setStarted, started }) => {
 
   const handlePlay = () => {
     setIsPlaying(true);
-    videoRef.current.play();
+    videoElement.current.play();
   };
 
   return (
     <div className="relative">
-      <video ref={videoRef} src={videoSrc} className="hidden" />
-      <canvas ref={canvasRef} className="w-full" />
+      <canvas ref={canvasRef} className="w-full h-auto" />
 
       {started && (
         <button
