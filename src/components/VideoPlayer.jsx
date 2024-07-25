@@ -22,7 +22,7 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play }) => {
     return () => {
       video.removeEventListener("loadeddata", handleLoadedData);
     };
-  }, [setStarted, isPlaying]);
+  }, [setStarted]);
 
   useEffect(() => {
     const video = videoRef.current;
