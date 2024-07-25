@@ -1,26 +1,39 @@
 import React, { useState, useEffect } from "react";
-import videoCasa from "./assets/playa.mp4";
+import { Loader } from "./components/loader/Loader";
+import StartButton from "./components/StartButton";
+import VideoPlayer from "./components/VideoPlayer";
 import "./index.css"; // Asegúrate de importar Tailwind CSS
+import videoCasa from "./assets/playa.mp4";
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
+  const [started, setStarted] = useState(false);
+
+  const handleStart = () => {
+    setStarted(true);
+  };
+
+  useEffect(() => {
+    // Simulate video preloading
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
+
+  if (loading) {
+    return <Loader setLoading={setLoading} />;
+  }
+
+  if (!started) {
+    return <StartButton onClick={handleStart} />;
+  }
+
   return (
-    <div className="app-container">
-      <figure className="video-container">
-        <video
-          className="background-video"
-          loop
-          muted
-          autoPlay
-          playsInline
-          src={videoCasa}
-        ></video>
-      </figure>
-      <div className="content">
-        <h1>Título del sitio</h1>
-        <button>Botón de ejemplo</button>
-        <p>Otro contenido que va encima del video.</p>
-      </div>
-    </div>
+    <VideoPlayer
+      videoSrc={videoCasa}
+      setStarted={setStarted}
+      started={started}
+    />
   );
 };
 
