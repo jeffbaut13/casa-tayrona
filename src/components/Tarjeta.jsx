@@ -23,7 +23,7 @@ const Tarjeta = ({ videoSrc, images, title, description, onClose }) => {
           ))}
         </div>
         <div className="text-[--primary] flex w-[550px] mt-10">
-          <h1 className="font-bold text-4xl">{title}</h1>
+          <h1 className="font-bold text-4xl">{title.replace(/_/g, " ")}</h1>
           <p className="mx-3">{description}</p>
         </div>
       </div>

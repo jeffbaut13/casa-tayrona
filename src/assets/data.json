@@ -8,7 +8,7 @@
     },
     {
       "id": 2,
-      "title": "Habitación Secundaria",
+      "title": "Habitacion_secundaria",
       "videoSrc": "../src/assets/playa.mp4",
       "images": ["../src/assets/fotoTarjeta.jpg", "../src/assets/fotoTarjeta.jpg"],
       "description": "Descripción de la habitación principal."
@@ -22,14 +22,14 @@
       },
       {
         "id": 4,
-        "title": "Piscinas",
+        "title": "Piscina",
         "videoSrc": "../src/assets/playa.mp4",
         "images": ["../src/assets/fotoTarjeta.jpg", "../src/assets/fotoTarjeta.jpg"],
           "description": "Descripción de la habitación principal."
       },
       {
         "id": 5,
-        "title": "Habitacion principal",
+        "title": "Habitacion_principal",
         "videoSrc": "../src/assets/playa.mp4",
         "images": ["../src/assets/fotoTarjeta.jpg", "../src/assets/fotoTarjeta.jpg"],
           "description": "Descripción de la habitación principal."
@@ -43,14 +43,14 @@
       },
       {
         "id": 7,
-        "title": "Tercera habitacion",
+        "title": "Habitacion_auxiliar",
         "videoSrc": "../src/assets/playa.mp4",
         "images": ["../src/assets/fotoTarjeta.jpg", "../src/assets/fotoTarjeta.jpg"],
           "description": "Descripción de la habitación principal."
       },
       {
         "id": 8,
-        "title": "Rio y playa",
+        "title": "Playa",
         "videoSrc": "../src/assets/playa.mp4",
         "images": ["../src/assets/fotoTarjeta.jpg", "../src/assets/fotoTarjeta.jpg"],
           "description": "Descripción de la habitación principal."

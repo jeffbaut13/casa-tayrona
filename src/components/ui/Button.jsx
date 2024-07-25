@@ -8,7 +8,7 @@ export const Button = ({
   handleHover,
 }) => {
   return (
-    <div className={`absolute top-1/2 -translate-x-[100%] left-0`}>
+    <div className={`absolute top-1/2 -translate-x-[100%] -left-2`}>
       <button
         ref={buRef}
         onClick={handleclick}
