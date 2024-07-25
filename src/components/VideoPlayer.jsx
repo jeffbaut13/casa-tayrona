@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
+import Menu from './Menu';
 
 const VideoPlayer = ({ videoSrc, setStarted, started }) => {
   const videoRef = useRef(null);
@@ -12,6 +13,9 @@ const VideoPlayer = ({ videoSrc, setStarted, started }) => {
 
     const handleLoadedData = () => {
       setStarted(true);
+      if (isPlaying) {
+        video.play();
+      }
     };
 
     video.addEventListener('loadeddata', handleLoadedData);
@@ -19,7 +23,7 @@ const VideoPlayer = ({ videoSrc, setStarted, started }) => {
     return () => {
       video.removeEventListener('loadeddata', handleLoadedData);
     };
-  }, [setStarted]);
+  }, [setStarted, isPlaying]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -54,14 +58,15 @@ const VideoPlayer = ({ videoSrc, setStarted, started }) => {
     }
   }, [isPlaying]);
 
-  const handlePlay = () => {
-    setIsPlaying(true);
-    videoRef.current.play();
-  };
+  useEffect(() => {
+    if (started) {
+      setIsPlaying(true);
+    }
+  }, [started]);
 
   return (
     <div className="relative">
-      <video ref={videoRef} src={videoSrc} className="w-full" loop muted autoPlay playsInline />
+      <video ref={videoRef} src={videoSrc} className="w-full" loop muted playsInline />
 
       {started && (
         <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
@@ -80,14 +85,7 @@ const VideoPlayer = ({ videoSrc, setStarted, started }) => {
           </button>
         </div>
       )}
-
-      {!isPlaying && (
-        <div className="absolute inset-0 flex justify-center items-center">
-          <button onClick={handlePlay} className="bg-blue-500 text-white px-4 py-2 rounded">
-            Reproducir
-          </button>
-        </div>
-      )}
+      <Menu />
     </div>
   );
 };
