@@ -1,12 +1,42 @@
 import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import Menu from "./Menu";
-import Terraza from "./Tarjeta";
+import Tarjeta from "./Tarjeta";
+import { Button } from "./ui/Button";
+import data from "../assets/data.json";
+
+const tiempo = [
+  { terraza: [4, 10] },
+  { habitacionSecundaria: [14, 20] },
+  { cocina: [23, 29] },
+  { piscina: [34, 39] },
+  { habitacionprincipal: [52, 56] },
+  { comedor: [63, 66] },
+  { habitacionAuxiliar: [70, 72] },
+  { playa: [86, 90] },
+];
+
+const diferencias = tiempo.map((obj) => {
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      return obj[key][1] - obj[key][0];
+    }
+  }
+});
+
+const nombres = tiempo.map((obj) => Object.keys(obj)[0]);
+
+const sumaTotal = diferencias.reduce((acc, curr) => acc + curr, 0);
 
 const VideoPlayer = ({ videoSrc, setStarted, started, play }) => {
   const videoRef = useRef(null);
-  const terrazaButtonRef = useRef(null);
-  const habitacionButtonRef = useRef(null);
+  const refs = useRef(
+    nombres.reduce((acc, value) => {
+      acc[value] = React.createRef();
+      return acc;
+    }, {})
+  );
+  const [showTarjeta, setShowTarjeta] = useState(null);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -25,16 +55,18 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play }) => {
   useEffect(() => {
     const video = videoRef.current;
 
-    const showButton = (buttonRef, start, end) => {
+    const showButton = (buttonRef, start, sumaTotal) => {
       gsap.to(buttonRef.current, {
         opacity: 1,
-        duration: 0.5,
+        translateX: "100%",
+        duration: 1,
         delay: start,
         onComplete: () => {
           gsap.to(buttonRef.current, {
             opacity: 0,
-            duration: 0.5,
-            delay: end - start,
+            translateX: "-100%",
+            duration: 2,
+            delay: sumaTotal - start,
           });
         },
       });
@@ -43,13 +75,16 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play }) => {
     video.addEventListener("timeupdate", () => {
       const currentTime = video.currentTime;
 
-      if (currentTime >= 1 && currentTime < 6) {
-        showButton(terrazaButtonRef, 0, 6);
-      }
+      tiempo.forEach((obj, index) => {
+        const key = Object.keys(obj)[0];
+        const [start, end] = obj[key];
 
-      if (currentTime >= 8 && currentTime < 15) {
-        showButton(habitacionButtonRef, 0, 7);
-      }
+        const resta = end - start;
+        const buttonRef = refs.current[key];
+        if (currentTime >= start && currentTime < end) {
+          showButton(buttonRef, 0, resta);
+        }
+      });
     });
   }, []);
 
@@ -58,6 +93,15 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play }) => {
       videoRef.current.play();
     }
   }, [play]);
+
+  const handleShowTarjeta = (nombre) => {
+    const tarjetaData = data.find(item => item.title.toLowerCase() === nombre);
+    setShowTarjeta(tarjetaData);
+  };
+
+  const handleHideTarjeta = () => {
+    setShowTarjeta(null);
+  };
 
   return (
     <div className="absolute z-0 top-0 left-0 w-full h-full overflow-hidden">
@@ -71,25 +115,29 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play }) => {
       />
 
       {started && (
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-          <button
-            ref={terrazaButtonRef}
-            className="absolute left-10 top-10 opacity-0 bg-green-500 text-white px-4 py-2 rounded pointer-events-auto"
-          >
-            Terraza
-          </button>
-
-          <button
-            ref={habitacionButtonRef}
-            className="absolute left-10 top-20 opacity-0 bg-red-500 text-white px-4 py-2 rounded pointer-events-auto"
-          >
-            Habitación
-          </button>
+        <div className="z-20 absolute top-0 left-0 w-full h-full">
+          {nombres.map((nombre, index) => (
+            <Button
+              handleclick={() => handleShowTarjeta(nombre)}
+              key={index}
+              buRef={refs.current[nombre]}
+              title={nombre}
+            />
+          ))}
         </div>
       )}
-       <Terraza />
+      
+      {showTarjeta && (
+        <Tarjeta
+          videoSrc={showTarjeta.videoSrc}
+          images={showTarjeta.images}
+          title={showTarjeta.title}
+          description={showTarjeta.description}
+          onClose={handleHideTarjeta}
+        />
+      )}
+      
       <Menu />
-     
     </div>
   );
 };
