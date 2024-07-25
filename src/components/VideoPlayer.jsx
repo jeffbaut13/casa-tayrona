@@ -19,7 +19,7 @@ const VideoPlayer = ({ videoSrc, setStarted, started }) => {
     return () => {
       video.removeEventListener('loadeddata', handleLoadedData);
     };
-  }, []);
+  }, [setStarted]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -64,21 +64,21 @@ const VideoPlayer = ({ videoSrc, setStarted, started }) => {
       <video ref={videoRef} src={videoSrc} className="w-full" />
 
       {started && (
-        <button
-          ref={terrazaButtonRef}
-          className="absolute left-0 top-10 opacity-0 bg-green-500 text-white px-4 py-2 rounded"
-        >
-          Terraza
-        </button>
-      )}
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+          <button
+            ref={terrazaButtonRef}
+            className="absolute left-10 top-10 opacity-0 bg-green-500 text-white px-4 py-2 rounded pointer-events-auto"
+          >
+            Terraza
+          </button>
 
-      {started && (
-        <button
-          ref={habitacionButtonRef}
-          className="absolute left-0 top-20 opacity-0 bg-red-500 text-white px-4 py-2 rounded"
-        >
-          Habitación
-        </button>
+          <button
+            ref={habitacionButtonRef}
+            className="absolute left-10 top-20 opacity-0 bg-red-500 text-white px-4 py-2 rounded pointer-events-auto"
+          >
+            Habitación
+          </button>
+        </div>
       )}
 
       {!isPlaying && (
