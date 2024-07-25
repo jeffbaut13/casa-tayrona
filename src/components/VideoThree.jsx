@@ -1,32 +1,72 @@
-import React, { useRef, useEffect } from "react";
+// src/App.js
+import React, { useRef, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useVideoTexture } from "@react-three/drei";
-import * as THREE from "three";
+
+import { OrbitControls, useAspect, useVideoTexture } from "@react-three/drei";
 import videoCasa from "../assets/playa.mp4";
 
-function VideoSphere() {
-  const videoTexture = useVideoTexture(videoCasa, {
-    start: true,
+function VideoMesh({ videoUrl, onVideoTimeUpdate }) {
+  const texture = useVideoTexture(videoUrl, {
+    crossOrigin: "Anonymous",
+    autoplay: true,
+    loop: true,
   });
+  const size = useAspect(window.innerWidth, window.innerHeight, 1);
 
-  // Invertir coordenadas UV
-  videoTexture.wrapS = THREE.RepeatWrapping;
-  videoTexture.wrapT = THREE.RepeatWrapping;
-  videoTexture.repeat.x = 1; // Invertir horizontalmente
+  // Add event listener to the video to track time update
+  useEffect(() => {
+    if (texture) {
+      const video = texture.image;
+      const handleTimeUpdate = () => {
+        if (video.currentTime >= 5) {
+          onVideoTimeUpdate();
+        }
+      };
+      video.addEventListener("timeupdate", handleTimeUpdate);
+      return () => {
+        video.removeEventListener("timeupdate", handleTimeUpdate);
+      };
+    }
+  }, [texture, onVideoTimeUpdate]);
 
   return (
-    <mesh>
-      <sphereGeometry args={[500, 60, 40]} />
-      <meshBasicMaterial map={videoTexture} side={THREE.BackSide} />
+    <mesh scale={size}>
+      <planeGeometry args={[1, 1]} />
+      <meshBasicMaterial map={texture} />
     </mesh>
   );
 }
 
-export default function CaApp() {
+function caApp() {
+  const [videoUrl, setVideoUrl] = useState(videoCasa);
+  const [showButtons, setShowButtons] = useState(false);
+
+  const handleChangeVideo = (url) => {
+    setVideoUrl(url);
+    setShowButtons(false); // Reset button visibility when video changes
+  };
+
+  const handleVideoTimeUpdate = () => {
+    setShowButtons(true);
+  };
+
   return (
-    <Canvas>
-      <VideoSphere />
-      <OrbitControls />
-    </Canvas>
+    <div style={{ position: "relative", width: "100vw", height: "100vh" }}>
+      <Canvas style={{ position: "absolute", top: 0, left: 0 }}>
+        <OrbitControls enableZoom={false} />
+        <VideoMesh
+          videoUrl={videoUrl}
+          onVideoTimeUpdate={handleVideoTimeUpdate}
+        />
+      </Canvas>
+      {showButtons && (
+        <div style={{ position: "absolute", top: "10px", left: "10px" }}>
+          <button onClick={() => handleChangeVideo(videoCasa)}>Video 1</button>
+          <button onClick={() => handleChangeVideo(videoCasa)}>Video 2</button>
+        </div>
+      )}
+    </div>
   );
 }
+
+export default caApp;
