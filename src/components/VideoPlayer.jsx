@@ -2,47 +2,28 @@ import React, { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 
 const VideoPlayer = ({ videoSrc, setStarted, started }) => {
-  const canvasRef = useRef(null);
+  const videoRef = useRef(null);
   const terrazaButtonRef = useRef(null);
   const habitacionButtonRef = useRef(null);
-  const videoElement = useRef(document.createElement('video'));
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
-    const video = videoElement.current;
-
-    // Set up video source and event listeners
-    video.src = videoSrc;
-    video.crossOrigin = 'anonymous'; // To handle CORS issues if video is from another domain
+    const video = videoRef.current;
 
     const handleLoadedData = () => {
       setStarted(true);
-      canvas.width = video.videoWidth || canvas.clientWidth;
-      canvas.height = video.videoHeight || canvas.clientHeight;
-      drawFrame();
-    };
-
-    const drawFrame = () => {
-      if (!video.paused && !video.ended) {
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        requestAnimationFrame(drawFrame);
-      }
     };
 
     video.addEventListener('loadeddata', handleLoadedData);
-    video.addEventListener('play', drawFrame);
 
     return () => {
       video.removeEventListener('loadeddata', handleLoadedData);
-      video.removeEventListener('play', drawFrame);
     };
   }, [setStarted]);
 
   useEffect(() => {
     if (isPlaying) {
-      const video = videoElement.current;
+      const video = videoRef.current;
 
       const showButton = (buttonRef, start, end) => {
         gsap.to(buttonRef.current, {
@@ -75,29 +56,29 @@ const VideoPlayer = ({ videoSrc, setStarted, started }) => {
 
   const handlePlay = () => {
     setIsPlaying(true);
-    videoElement.current.play();
+    videoRef.current.play();
   };
 
   return (
     <div className="relative">
-      <canvas ref={canvasRef} className="w-full h-auto" />
+      <video ref={videoRef} src={videoSrc} className="w-full" loop muted autoPlay playsInline />
 
       {started && (
-        <button
-          ref={terrazaButtonRef}
-          className="absolute left-10 top-10 opacity-0 bg-green-500 text-white px-4 py-2 rounded pointer-events-auto"
-        >
-          Terraza
-        </button>
-      )}
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+          <button
+            ref={terrazaButtonRef}
+            className="absolute left-10 top-10 opacity-0 bg-green-500 text-white px-4 py-2 rounded pointer-events-auto"
+          >
+            Terraza
+          </button>
 
-      {started && (
-        <button
-          ref={habitacionButtonRef}
-          className="absolute left-10 top-20 opacity-0 bg-red-500 text-white px-4 py-2 rounded pointer-events-auto"
-        >
-          Habitación
-        </button>
+          <button
+            ref={habitacionButtonRef}
+            className="absolute left-10 top-20 opacity-0 bg-red-500 text-white px-4 py-2 rounded pointer-events-auto"
+          >
+            Habitación
+          </button>
+        </div>
       )}
 
       {!isPlaying && (
