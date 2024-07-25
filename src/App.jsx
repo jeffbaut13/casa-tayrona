@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Loader } from "./components/loader/Loader";
-import StartButton from './StartButton';
-import VideoPlayer from './VideoPlayer';
+import StartButton from './components/StartButton';
+import VideoPlayer from './components/VideoPlayer';
 import './index.css'; // Asegúrate de importar Tailwind CSS
+import videoCasa from "./assets/playa.mp4"
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -27,7 +28,7 @@ const App = () => {
     return <StartButton onClick={handleStart} />;
   }
 
-  return <VideoPlayer videoSrc="path/to/your/video.mp4" />;
+  return <VideoPlayer videoSrc={videoCasa} setStarted={setStarted} started={started}/>;
 };
 
 export default App;
