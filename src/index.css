@@ -18,10 +18,19 @@
     font-style: Light;
     src: url("./fonts/Blacker-Display-Light-trial.ttf");
   }
+  @font-face {
+    font-family: "Blacker Regular";
+    font-style: normal;
+    src: url("./fonts/Blacker-Display-Regular-trial.ttf");
+  }
 }
 .blackerMedium {
   font-family: "Blacker Medium";
   font-weight: 500;
+}
+.blackerNormal {
+  font-family: "Blacker Regular";
+  font-weight: 400;
 }
 .blackerLight {
   font-family: "Blacker Light";
