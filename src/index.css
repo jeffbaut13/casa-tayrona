@@ -2,31 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --primary-color: #000000;
-  --second-color: #000000;
-  --thirty-color: #000000;
+@layer base {
+  @font-face {
+    font-family: "Blacker Bold";
+    font-style: bold;
+    src: url("./fonts/Blacker-Display-Bold-trial.ttf");
+  }
+  @font-face {
+    font-family: "Blacker Medium";
+    font-style: Medium;
+    src: url("./fonts/Blacker-Display-Medium-trial.ttf");
+  }
+  @font-face {
+    font-family: "Blacker Light";
+    font-style: Light;
+    src: url("./fonts/Blacker-Display-Light-trial.ttf");
+  }
+}
+.blackerMedium {
+  font-family: "Blacker Medium";
+  font-weight: 500;
+}
+.blackerLight {
+  font-family: "Blacker Light";
+  font-weight: 300;
+}
+.blackerBold {
+  font-family: "Blacker Bold";
+  font-weight: 700;
+}
 
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+:root {
+  @apply h-screen;
+  --primary: #623e2a;
+  --second-color: #000000;
+  --bg: #f4efdf;
+  font-family: "Blacker Light", sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /*  background-color: var(--bg); */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+svg.logo path {
+  fill: var(--primary);
+  stroke-width: 0px;
+}
+svg.logo circle {
+  fill: none;
+  stroke: var(--primary);
+  stroke-miterlimit: 10;
+}
 
 body {
-  @apply flex justify-center items-center;
-  margin: 0;
-  padding: 0;
-
-  min-width: 320px;
-  min-height: 100vh;
+  @apply blackerMedium flex justify-center items-center m-0 p-0 min-w-96 h-full;
 }
 
 /* index.css */
