@@ -5,6 +5,7 @@ import Tarjeta from "./Tarjeta";
 import { Button } from "./ui/Button";
 import { togglePlay } from "../helpers/helper";
 import data from "../assets/data.json";
+import { LogoImagen } from "./loader/LogoImagen";
 
 const tiempo = [
   { Terraza: [4, 10] },
@@ -88,10 +89,9 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play, setPlay }) => {
   }, [play]);
 
   const handleShowTarjeta = (nombre) => {
-    
-    const tarjetaData = data.find(item => item.title === nombre);
+    const tarjetaData = data.find((item) => item.title === nombre);
     setShowTarjeta(tarjetaData);
-    setPlay(false)
+    setPlay(false);
   };
 
   const handleHideTarjeta = () => {
@@ -101,6 +101,8 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play, setPlay }) => {
 
   return (
     <div className="absolute z-0 top-0 left-0 w-full h-full overflow-hidden">
+      <Menu />
+      <LogoImagen />
       <video
         ref={videoRef}
         src={videoSrc}
@@ -125,7 +127,7 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play, setPlay }) => {
           ))}
         </div>
       )}
-      
+
       {showTarjeta && (
         <Tarjeta
           videoSrc={showTarjeta.videoSrc}
@@ -135,8 +137,6 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play, setPlay }) => {
           onClose={handleHideTarjeta}
         />
       )}
-      
-      <Menu />
     </div>
   );
 };
