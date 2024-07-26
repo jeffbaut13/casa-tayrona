@@ -67,7 +67,7 @@ const VideoPlayer = ({
         onComplete: () => {
           gsap.to(buttonRef.current, {
             opacity: 0,
-            translateY: "-100%",
+            translateY: "40%",
             duration: 1,
             delay: sumaTotal - start,
           });

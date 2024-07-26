@@ -15,7 +15,7 @@ export const Button = ({
         onClick={handleclick}
         className={`${
           customStyle ? customStyle : ""
-        } h-full w-full btnInicio opacity-0 relative flex justify-start items-center blackerMedium z-20 text-white text-6xl`}
+        } -translate-y-16 h-full w-full btnInicio opacity-0 relative flex justify-start items-center blackerMedium z-20 text-white text-6xl`}
       >
         <IconoLink />
         <span className="z-10 w-[70%] text-left">{title}</span>

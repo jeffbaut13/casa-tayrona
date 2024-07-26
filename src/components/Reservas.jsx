@@ -25,7 +25,7 @@ const Reserva = ({ onClose }) => {
 
   return (
     <div
-      className="relative text-black h-screen bg-cover bg-center"
+      className="relative text-black h-screen bg-cover bg-center z-40"
       style={{ backgroundImage: "url('../src/assets/reserva.jpg')" }}
     >
       <div className="absolute inset-0 flex flex-col justify-center items-center w-full z-50">
