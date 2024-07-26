@@ -3,16 +3,14 @@ import gsap from "gsap";
 import React, { useEffect, useRef, useState } from "react";
 
 const Reserva = ({ onClose }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(1); // Asumiendo que el índice inicial es 1
+
   const handlePrev = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
+    setCurrentImageIndex((prevIndex) => (prevIndex <= 1 ? 1 : prevIndex - 1));
   };
 
   const handleNext = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
+    setCurrentImageIndex((prevIndex) => (prevIndex >= 4 ? 4 : prevIndex + 1));
   };
 
   useEffect(() => {
@@ -33,15 +31,34 @@ const Reserva = ({ onClose }) => {
   return (
     <div
       onKeyDown={close}
-      className="absolute w-full h-full bg-white bg-opacity-20 backdrop-blur-2xl z-50"
+      className="absolute w-full h-full bg-white bg-opacity-20 backdrop-blur-2xl z-[55]"
     >
-      <div className="absolute inset-0 flex flex-col justify-center items-center w-full z-50">
-        {/* <iframe
-          width="707 "
-          height="785"
-          src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FfTLAo9BIJfEFfzs2YuKCME%2Fprueba-kasacoroto%3Fnode-id%3D1-5%26t%3DiR1xCaEplPfbqfcu-1%26scaling%3Dscale-down%26content-scaling%3Dfixed%26page-id%3D0%253A1"
-          allowFullScreen
-        ></iframe> */}
+      <div className="absolute inset-0 flex justify-center items-center w-full z-50">
+        <div onClick={onClose} className="fixed z-10 w-full h-full" />
+
+        <figure
+          onClick={onClose}
+          className="cursor-pointer absolute left-1/2 -translate-x-1/2 bottom-12 w-16 h-16 rotate-180 z-20"
+        >
+          <img src="/imagenes-tarjetas/cerrargaleria.svg" alt="" />
+        </figure>
+
+        <figure
+          onClick={handlePrev}
+          className="cursor-pointer w-16 h-16 rotate-180 z-20"
+        >
+          <img src="/imagenes-tarjetas/flechaderimagen.svg" alt="" />
+        </figure>
+        <figure className="w-fit h-2/3 mx-12 z-20">
+          <img
+            className="w-full h-full object-contain"
+            src={`/img${currentImageIndex}.png`}
+            alt=""
+          />
+        </figure>
+        <figure onClick={handleNext} className="cursor-pointer w-16 h-16 z-20">
+          <img src="/imagenes-tarjetas/flechaderimagen.svg" alt="" />
+        </figure>
       </div>
     </div>
   );
