@@ -6,11 +6,6 @@ const Menu = ({ onButtonClick }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = React.useRef(null);
   const [hover, setHover] = useState(false);
-  const [active, setActive] = useState(false);
-
-  const handleClick = () => {
-    setActive((prevActive) => !prevActive);
-  };
 
   const toggleMenu = () => {
     setIsOpen((prev) => {
@@ -47,7 +42,7 @@ const Menu = ({ onButtonClick }) => {
           className="absolute top-4 right-8 cursor-pointer"
           onClick={toggleMenu}
         >
-          <HamburgesaIcon handleClick={handleClick} active={active} />
+          <HamburgesaIcon active={isOpen} />
         </div>
 
         {/* Texts when hover */}
@@ -83,22 +78,22 @@ const Menu = ({ onButtonClick }) => {
               <button onClick={() => handleButtonClick("Habitacion_auxiliar")} className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start">
                 Habitaciones auxiliar
               </button>
-              <button onClick={() => handleButtonClick("cocina")} className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start">
+              <button onClick={() => handleButtonClick("Cocina")} className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start">
                 Cocina
               </button>
-              <button onClick={() => handleButtonClick("comedor")} className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start">
+              <button onClick={() => handleButtonClick("Comedor")} className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start">
                 Comedor
               </button>
             </div>
             <div className="flex flex-col w-1/2 mt-10">
               <h1 className="mt-4 font-bold text-2xl">Exteriores</h1>
-              <button onClick={() => handleButtonClick("terraza")} className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start">
+              <button onClick={() => handleButtonClick("Terraza")} className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start">
                 Terraza
               </button>
-              <button onClick={() => handleButtonClick("piscina")} className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start">
+              <button onClick={() => handleButtonClick("Piscina")} className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start">
                 Piscina
               </button>
-              <button onClick={() => handleButtonClick("playa")} className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start">
+              <button onClick={() => handleButtonClick("Playa")} className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start">
                 Playa
               </button>
             </div>

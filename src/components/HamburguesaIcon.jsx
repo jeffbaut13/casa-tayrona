@@ -1,9 +1,8 @@
 import React from "react";
 
-const HamburgesaIcon = ({ active, handleClick }) => {
+const HamburgesaIcon = ({ active }) => {
   return (
     <span
-      onClick={handleClick}
       className={`${
         active ? "active" : ""
       } burgerIcon cursor-pointer z-[101] flex flex-col justify-between relative w-7 h-6`}
