@@ -101,7 +101,7 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play, setPlay }) => {
 
   return (
     <div className="absolute z-0 top-0 left-0 w-full h-full overflow-hidden">
-      <Menu />
+      <Menu onButtonClick={handleShowTarjeta} />
       <LogoImagen />
       <video
         ref={videoRef}

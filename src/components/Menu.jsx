@@ -2,15 +2,10 @@ import React, { useState } from "react";
 import { gsap } from "gsap";
 import HamburgesaIcon from "./HamburguesaIcon";
 
-const Menu = () => {
+const Menu = ({ onButtonClick }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = React.useRef(null);
   const [hover, setHover] = useState(false);
-  const [active, setActive] = useState(false);
-
-  const handleClick = () => {
-    setActive((prevActive) => !prevActive);
-  };
 
   const toggleMenu = () => {
     setIsOpen((prev) => {
@@ -22,6 +17,11 @@ const Menu = () => {
       });
       return isExpanding;
     });
+  };
+
+  const handleButtonClick = (buttonName) => {
+    onButtonClick(buttonName);
+    toggleMenu(); // Close the menu after a button click
   };
 
   return (
@@ -42,7 +42,7 @@ const Menu = () => {
           className="absolute top-4 right-8 cursor-pointer"
           onClick={toggleMenu}
         >
-          <HamburgesaIcon handleClick={handleClick} active={active} />
+          <HamburgesaIcon active={isOpen} />
         </div>
 
         {/* Texts when hover */}
@@ -58,78 +58,66 @@ const Menu = () => {
         {isOpen && (
           <div className="flex flex-col h-full items-center justify-center">
             <div className="flex flex-col w-1/2">
-              <h1 className=" font-bold text-1xl">Interiores</h1>
-              <a
-                href="#section2"
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4"
+              <h1 className="font-bold text-2xl">Interiores</h1>
+              <button
+                onClick={() => handleButtonClick("Habitacion_principal")}
+                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
               >
                 Habitación principal
-              </a>
-              <a
-                href="#section2"
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4"
+              </button>
+              <button
+                onClick={() => handleButtonClick("Habitacion_secundaria")}
+                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
               >
                 Habitaciones secundarias
-              </a>
-              <a
-                href="#section3"
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4"
+              </button>
+              <button
+                onClick={() => handleButtonClick("Habitacion_auxiliar")}
+                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
+              >
+                Habitaciones auxiliar
+              </button>
+              <button
+                onClick={() => handleButtonClick("Cocina")}
+                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
               >
                 Cocina
-              </a>
-              <a
-                href="#section4"
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4"
+              </button>
+              <button
+                onClick={() => handleButtonClick("Comedor")}
+                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
               >
-                Baños
-              </a>
-              <a
-                href="#section5"
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4"
-              >
-                Sala
-              </a>
+                Comedor
+              </button>
             </div>
             <div className="flex flex-col w-1/2 mt-10">
-              <h1 className="mt-4 font-bold text-1xl">Exteriores</h1>
-              <a
-                href="#section1"
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4"
+              <h1 className="mt-4 font-bold text-2xl">Exteriores</h1>
+              <button
+                onClick={() => handleButtonClick("Terraza")}
+                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
               >
                 Terraza
-              </a>
-              <a
-                href="#section2"
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4"
+              </button>
+              <button
+                onClick={() => handleButtonClick("Piscina")}
+                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
               >
                 Piscina
-              </a>
-              <a
-                href="#section3"
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4"
-              >
-                Río
-              </a>
-              <a
-                href="#section4"
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4"
+              </button>
+              <button
+                onClick={() => handleButtonClick("Playa")}
+                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
               >
                 Playa
-              </a>
+              </button>
             </div>
-            <div className=" flex flex-col w-1/2 mt-10 font-bold ">
-              <a
-                href="#contacto"
-                className="block hover:text-[#0090b2] transition-colors px-2"
-              >
+            <div className="flex flex-col w-1/2 mt-10 font-bold">
+              <button className="block hover:text-[#0090b2] transition-colors px-2 text-start">
                 Contacto
-              </a>
-              <a
-                href="#reserva"
-                className="block hover:text-[#0090b2] transition-colors px-2"
-              >
+              </button>
+              <button className="block hover:text-[#0090b2] transition-colors px-2 text-start">
                 y Reserva
-              </a>
+              </button>
             </div>
           </div>
         )}
