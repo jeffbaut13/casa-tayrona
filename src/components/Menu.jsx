@@ -38,9 +38,10 @@ const Menu = ({
     toggleMenu();
   };
 
+  console.log(hover);
   return (
     <div
-      className="relative z-50"
+      className="relative z-[51]"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => {
         setHover(false);
@@ -56,7 +57,7 @@ const Menu = ({
           className="absolute top-4 right-8 cursor-pointer"
           onClick={toggleMenu}
         >
-          <HamburgesaIcon active={isOpen} />
+          <HamburgesaIcon active={isOpen} hover={hover} />
         </div>
 
         {/* Texts when hover */}
@@ -65,7 +66,7 @@ const Menu = ({
             <div className="absolute top-1/2 right-0 flex items-center justify-center -rotate-90 w-full whitespace-nowrap">
               <button
                 onClick={cerrarAbrirCart}
-                className="block hover:text-[#0090b2] transition-colors"
+                className="uppercase block hover:text-[#0090b2] transition-colors"
               >
                 Contacto y reserva
               </button>
@@ -77,6 +78,8 @@ const Menu = ({
           audioSrc={audioMusic}
           isPlaying={isPlaying}
           handleClickAudio={handleClickAudio}
+          active={isOpen}
+          hover={hover}
         />
 
         {/* Buttons in expanded menu */}

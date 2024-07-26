@@ -104,7 +104,7 @@ body {
 }
 /*Hamburgesa*/
 .lineBurger {
-  @apply absolute w-full h-1 bg-[--primary] rounded-full transition-all ease-in-out duration-500;
+  @apply absolute w-full h-1 rounded-full transition-all ease-in-out duration-500;
 }
 .lineBurger1 {
   @apply top-0;

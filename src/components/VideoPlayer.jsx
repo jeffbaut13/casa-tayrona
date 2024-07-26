@@ -131,10 +131,11 @@ const VideoPlayer = ({
       />
       {showReserva && <Reserva onClose={handleHideReserva} />}
       <LogoImagen />
+      <div className="bg-gradient-to-b from-[#00000070] via-transparent to-[#000000a1] fixed z-[1] top-0 left-0 w-screen h-screen pointer-events-none" />
       <video
         ref={videoRef}
         src={videoSrc}
-        className="w-full"
+        className="w-full z-0"
         loop
         muted
         playsInline
@@ -143,7 +144,7 @@ const VideoPlayer = ({
       {started && (
         <div
           //onClick={() => togglePlay(play, setPlay)}
-          className="absolute bottom-12 left-12   w-[32rem] h-28 flex items-center"
+          className="absolute bottom-12 left-12 z-10 w-[32rem] h-28 flex items-center"
         >
           <div className="relative w-full h-full">
             {nombres.map((nombre, index) => (

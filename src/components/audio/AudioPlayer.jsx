@@ -1,29 +1,22 @@
 import Lottie from "lottie-react";
 import React, { useState, useRef, useEffect } from "react";
 import audio from "../../lotties/audio.json";
+import { Audio } from "../ui/Audio";
 
-const AudioPlayer = ({ audioSrc, isPlaying, handleClickAudio, audioRef }) => {
+const AudioPlayer = ({
+  audioSrc,
+  isPlaying,
+  handleClickAudio,
+  audioRef,
+  active,
+  hover,
+}) => {
   const lottieRef = useRef(null);
 
-  useEffect(() => {
-    if (!isPlaying) {
-      lottieRef.current.pause();
-    } else {
-      lottieRef.current.play();
-    }
-  }, [isPlaying]);
-
   return (
-    <div className="w-16 absolute bottom-6 left-1/2 -translate-x-1/2">
-      <button
-        onClick={handleClickAudio}
-        className="p-2 rounded-full focus:outline-none"
-      >
-        <Lottie
-          className={isPlaying ? "" : "opacity-40"}
-          lottieRef={lottieRef}
-          animationData={audio}
-        />
+    <div className="w-16 h-16 absolute bottom-6 left-1/2 -translate-x-1/2">
+      <button onClick={handleClickAudio} className="w-full h-full">
+        <Audio isPlaying={isPlaying} active={active} hover={hover} />
       </button>
       <audio ref={audioRef} src={audioSrc} loop />
     </div>
