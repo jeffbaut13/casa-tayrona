@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { gsap } from "gsap";
 import HamburgesaIcon from "./HamburguesaIcon";
 
-
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = React.useRef(null);
@@ -48,23 +47,10 @@ const Menu = () => {
 
         {/* Texts when hover */}
         {!isOpen && hover && (
-          <div
-            className="absolute top-1/2 right-0 flex items-center justify-center -rotate-90 w-full"
-            
-          >
-            <a
-              href="#contacto"
-              className="block hover:text-[#0090b2] transition-colors pl-4"
-            >
-              Contacto 
-            </a>
-            <p className="pl-4">y</p>
-            <a
-              href="#reserva"
-              className="block hover:text-[#0090b2] transition-colors pl-4"
-            >
-              Reserva
-            </a>
+          <div className="absolute top-1/2 right-0 flex items-center justify-center -rotate-90 w-full whitespace-nowrap">
+            <button className="block hover:text-[#0090b2] transition-colors">
+              Contacto y reserva
+            </button>
           </div>
         )}
 
