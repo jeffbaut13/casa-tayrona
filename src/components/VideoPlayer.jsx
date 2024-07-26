@@ -131,6 +131,7 @@ const VideoPlayer = ({
       />
       {showReserva && <Reserva onClose={handleHideReserva} />}
       <LogoImagen />
+      <div className="bg-gradient-to-b from-[#00000070] via-transparent to-[#000000a1] fixed z-[1] top-0 left-0 w-screen h-screen pointer-events-none" />
       <video
         ref={videoRef}
         src={videoSrc}
