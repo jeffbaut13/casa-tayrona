@@ -48,10 +48,10 @@ const VideoPlayer = ({
       setStarted(true);
     };
 
-    video.addEventListener("canplaythrough", handleLoadedData);
+    video.addEventListener("loadedmetadata", handleLoadedData);
 
     return () => {
-      video.removeEventListener("canplaythrough", handleLoadedData);
+      video.removeEventListener("loadedmetadata", handleLoadedData);
     };
   }, [setStarted]);
 
