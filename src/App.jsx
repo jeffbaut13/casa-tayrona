@@ -22,14 +22,14 @@ const App = () => {
   console.log(isPlaying);
   return (
     <>
-      {/* {loading && (
+      {loading && (
         <Loader
           setPlay={setPlay}
           started={started}
           setloading={setloading}
           handleClickAudio={handleClickAudio}
         />
-      )} */}
+      )}
 
       <VideoPlayer
         audioRef={audioRef}
