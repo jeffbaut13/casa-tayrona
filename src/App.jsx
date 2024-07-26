@@ -6,7 +6,7 @@ import "./index.css"; // Asegúrate de importar Tailwind CSS
 
 const App = () => {
   const [play, setPlay] = useState(false);
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState(true);
   const [loading, setloading] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);

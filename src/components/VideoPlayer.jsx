@@ -44,20 +44,6 @@ const VideoPlayer = ({
   useEffect(() => {
     const video = videoRef.current;
 
-    const handleLoadedData = () => {
-      setStarted(true);
-    };
-
-    video.addEventListener("loadedmetadata", handleLoadedData);
-
-    return () => {
-      video.removeEventListener("loadedmetadata", handleLoadedData);
-    };
-  }, [setStarted]);
-
-  useEffect(() => {
-    const video = videoRef.current;
-
     const showButton = (buttonRef, start, sumaTotal) => {
       gsap.to(buttonRef.current, {
         opacity: 1,
