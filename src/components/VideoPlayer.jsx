@@ -134,7 +134,7 @@ const VideoPlayer = ({
       <video
         ref={videoRef}
         src={videoSrc}
-        className="w-full"
+        className="w-full z-0"
         loop
         muted
         playsInline
@@ -143,7 +143,7 @@ const VideoPlayer = ({
       {started && (
         <div
           //onClick={() => togglePlay(play, setPlay)}
-          className="absolute bottom-12 left-12   w-[32rem] h-28 flex items-center"
+          className="absolute bottom-12 left-12 z-10 w-[32rem] h-28 flex items-center"
         >
           <div className="relative w-full h-full">
             {nombres.map((nombre, index) => (

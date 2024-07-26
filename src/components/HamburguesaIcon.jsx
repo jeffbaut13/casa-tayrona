@@ -1,15 +1,20 @@
 import React from "react";
 
-const HamburgesaIcon = ({ active }) => {
+const HamburgesaIcon = ({ active, hover }) => {
   return (
     <span
       className={`${
         active ? "active" : ""
       } burgerIcon cursor-pointer z-[101] flex flex-col justify-between relative w-7 h-6`}
     >
-      <div className="lineBurger lineBurger1 "></div>
-      <div className="lineBurger lineBurger2 "></div>
-      <div className="lineBurger lineBurger3 "></div>
+      {Array.from({ length: 3 }, (_, index) => (
+        <div
+          key={index + 1}
+          className={`${hover ? "bg-[--primary]" : ""}  ${
+            active ? "bg-[--primary]" : ""
+          } bg-[--bg] lineBurger lineBurger${index + 1}`}
+        />
+      ))}
     </span>
   );
 };
