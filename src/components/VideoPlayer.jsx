@@ -6,6 +6,7 @@ import { Button } from "./ui/Button";
 import { togglePlay } from "../helpers/helper";
 import data from "../assets/data.json";
 import { LogoImagen } from "./loader/LogoImagen";
+import Reserva from "../components/Reservas";
 
 const tiempo = [
   { Terraza: [4, 10] },
@@ -20,7 +21,16 @@ const tiempo = [
 
 const nombres = tiempo.map((obj) => Object.keys(obj)[0]);
 
-const VideoPlayer = ({ videoSrc, setStarted, started, play, setPlay }) => {
+const VideoPlayer = ({
+  videoSrc,
+  setStarted,
+  started,
+  play,
+  setPlay,
+  isPlaying,
+  handleClickAudio,
+  audioRef,
+}) => {
   const videoRef = useRef(null);
   const refs = useRef(
     nombres.reduce((acc, value) => {
@@ -29,6 +39,7 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play, setPlay }) => {
     }, {})
   );
   const [showTarjeta, setShowTarjeta] = useState(false);
+  const [showReserva, setShowReserva] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -50,13 +61,13 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play, setPlay }) => {
     const showButton = (buttonRef, start, sumaTotal) => {
       gsap.to(buttonRef.current, {
         opacity: 1,
-        translateX: "100%",
+        translateY: "0%",
         duration: 0.5,
         delay: start,
         onComplete: () => {
           gsap.to(buttonRef.current, {
             opacity: 0,
-            translateX: "-100%",
+            translateY: "-100%",
             duration: 1,
             delay: sumaTotal - start,
           });
@@ -99,9 +110,24 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play, setPlay }) => {
     setPlay(true);
   };
 
+  const handleShowReserva = () => {
+    setShowReserva(true);
+  };
+
+  const handleHideReserva = () => {
+    setShowReserva(false);
+  };
+
   return (
     <div className="absolute z-0 top-0 left-0 w-full h-full overflow-hidden">
-      <Menu onButtonClick={handleShowTarjeta} />
+      <Menu
+        audioRef={audioRef}
+        handleShowReserva={handleShowReserva}
+        onButtonClick={handleShowTarjeta}
+        isPlaying={isPlaying}
+        handleClickAudio={handleClickAudio}
+      />
+      {showReserva && <Reserva onClose={handleHideReserva} />}
       <LogoImagen />
       <video
         ref={videoRef}
@@ -115,16 +141,18 @@ const VideoPlayer = ({ videoSrc, setStarted, started, play, setPlay }) => {
       {started && (
         <div
           //onClick={() => togglePlay(play, setPlay)}
-          className="z-20 absolute top-0 left-0 w-full h-full"
+          className="absolute bottom-12 left-12   w-[32rem] h-28 flex items-center"
         >
-          {nombres.map((nombre, index) => (
-            <Button
-              handleclick={() => handleShowTarjeta(nombre)}
-              key={index}
-              buRef={refs.current[nombre]}
-              title={nombre.replace(/_/g, " ")}
-            />
-          ))}
+          <div className="relative w-full h-full">
+            {nombres.map((nombre, index) => (
+              <Button
+                handleclick={() => handleShowTarjeta(nombre)}
+                key={index}
+                buRef={refs.current[nombre]}
+                title={nombre.replace(/_/g, " ")}
+              />
+            ))}
+          </div>
         </div>
       )}
 

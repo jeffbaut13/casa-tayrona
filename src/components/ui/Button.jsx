@@ -1,4 +1,5 @@
 import React from "react";
+import { IconoLink } from "../loader/IconoLink";
 
 export const Button = ({
   buRef,
@@ -8,20 +9,16 @@ export const Button = ({
   handleHover,
 }) => {
   return (
-    <div className={`absolute top-1/2 -translate-x-[100%] -left-2`}>
+    <div className="h-full w-full absolute">
       <button
         ref={buRef}
         onClick={handleclick}
         className={`${
           customStyle ? customStyle : ""
-        } btnInicio relative flex justify-center items-center blackerMedium z-20 bg-[#ffffff80] text-[--primary] border-2 border-[--primary] py-2 px-16 text-xl`}
+        } h-full w-full btnInicio opacity-0 relative flex justify-start items-center blackerMedium z-20 text-white text-6xl`}
       >
-        <span className="z-10">{title}</span>
-        {handleHover ? (
-          <span className="absolute z-1 w-full h-full bg-black top-0 left-0"></span>
-        ) : (
-          <></>
-        )}
+        <IconoLink />
+        <span className="z-10 w-[70%] text-left">{title}</span>
       </button>
     </div>
   );

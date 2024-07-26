@@ -3,7 +3,7 @@ import imagenLogo from "../../assets/logo.svg";
 
 export const LogoImagen = () => {
   return (
-    <figure className="absolute top-12 z-50 left-1/2 -translate-x-1/2 w-60">
+    <figure className="absolute top-12 z-100 left-1/2 -translate-x-1/2 w-52">
       <img src={imagenLogo} alt="" />
     </figure>
   );

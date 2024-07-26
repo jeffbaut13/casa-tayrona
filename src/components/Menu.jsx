@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { gsap } from "gsap";
 import HamburgesaIcon from "./HamburguesaIcon";
+import AudioPlayer from "./audio/AudioPlayer";
+import audioMusic from "../assets/audioMusic.mp3";
 
-const Menu = ({ onButtonClick }) => {
+const Menu = ({
+  onButtonClick,
+  isPlaying,
+  handleClickAudio,
+  audioRef,
+  handleShowReserva,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = React.useRef(null);
   const [hover, setHover] = useState(false);
@@ -20,8 +28,14 @@ const Menu = ({ onButtonClick }) => {
   };
 
   const handleButtonClick = (buttonName) => {
-    onButtonClick(buttonName);
+    onButtonClick(buttonName); // Show the Reserva component
+
     toggleMenu(); // Close the menu after a button click
+  };
+
+  const cerrarAbrirCart = () => {
+    handleShowReserva();
+    toggleMenu();
   };
 
   return (
@@ -47,17 +61,28 @@ const Menu = ({ onButtonClick }) => {
 
         {/* Texts when hover */}
         {!isOpen && hover && (
-          <div className="absolute top-1/2 right-0 flex items-center justify-center -rotate-90 w-full whitespace-nowrap">
-            <button className="block hover:text-[#0090b2] transition-colors">
-              Contacto y reserva
-            </button>
-          </div>
+          <>
+            <div className="absolute top-1/2 right-0 flex items-center justify-center -rotate-90 w-full whitespace-nowrap">
+              <button
+                onClick={cerrarAbrirCart}
+                className="block hover:text-[#0090b2] transition-colors"
+              >
+                Contacto y reserva
+              </button>
+            </div>
+          </>
         )}
+        <AudioPlayer
+          audioRef={audioRef}
+          audioSrc={audioMusic}
+          isPlaying={isPlaying}
+          handleClickAudio={handleClickAudio}
+        />
 
         {/* Buttons in expanded menu */}
         {isOpen && (
           <div className="flex flex-col h-full items-center justify-center">
-            <div className="flex flex-col w-1/2">
+            <div className="flex flex-col w-1/2 whitespace-nowrap">
               <h1 className="font-bold text-2xl">Interiores</h1>
               <button
                 onClick={() => handleButtonClick("Habitacion_principal")}
@@ -90,7 +115,7 @@ const Menu = ({ onButtonClick }) => {
                 Comedor
               </button>
             </div>
-            <div className="flex flex-col w-1/2 mt-10">
+            <div className="flex flex-col w-1/2 mt-10 whitespace-nowrap">
               <h1 className="mt-4 font-bold text-2xl">Exteriores</h1>
               <button
                 onClick={() => handleButtonClick("Terraza")}
@@ -111,12 +136,12 @@ const Menu = ({ onButtonClick }) => {
                 Playa
               </button>
             </div>
-            <div className="flex flex-col w-1/2 mt-10 font-bold">
-              <button className="block hover:text-[#0090b2] transition-colors px-2 text-start">
-                Contacto
-              </button>
-              <button className="block hover:text-[#0090b2] transition-colors px-2 text-start">
-                y Reserva
+            <div className="flex flex-col w-1/2 mt-10 font-bold whitespace-nowrap">
+              <button
+                onClick={cerrarAbrirCart}
+                className="block hover:text-[#0090b2] transition-colors px-2 text-start"
+              >
+                Contacto y Reserva
               </button>
             </div>
           </div>

@@ -4,7 +4,7 @@ import Lottie from "lottie-react";
 import loader from "../../lotties/logo.json";
 import gsap from "gsap";
 
-export const Loader = ({ setPlay, started, setloading }) => {
+export const Loader = ({ setPlay, started, setloading, handleClickAudio }) => {
   //const [animationPlayed, setAnimationPlayed] = useState(false);
   const container = useRef();
   useGSAP(
@@ -32,6 +32,7 @@ export const Loader = ({ setPlay, started, setloading }) => {
   );
 
   const handleLoading = () => {
+    handleClickAudio();
     const tl = gsap.timeline();
 
     tl.to(".LoadIcon", {
