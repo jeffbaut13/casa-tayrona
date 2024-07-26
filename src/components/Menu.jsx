@@ -88,19 +88,19 @@ const Menu = ({
             <div className="flex flex-col w-1/2 whitespace-nowrap">
               <h1 className="font-bold text-2xl">Interiores</h1>
               <button
-                onClick={() => handleButtonClick("Habitacion_principal")}
+                onClick={() => handleButtonClick("Habitación_principal")}
                 className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
               >
                 Habitación principal
               </button>
               <button
-                onClick={() => handleButtonClick("Habitacion_secundaria")}
+                onClick={() => handleButtonClick("Habitación_secundaria")}
                 className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
               >
                 Habitaciones secundarias
               </button>
               <button
-                onClick={() => handleButtonClick("Habitacion_auxiliar")}
+                onClick={() => handleButtonClick("Habitación_auxiliar")}
                 className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
               >
                 Habitaciones auxiliar
