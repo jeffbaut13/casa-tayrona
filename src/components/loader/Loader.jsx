@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import Lottie from "lottie-react";
 import loader from "../../lotties/logo.json";
+import data from "../../lotties/data.json";
 import gsap from "gsap";
 
 export const Loader = ({ setPlay, started, setloading, handleClickAudio }) => {
@@ -69,7 +70,7 @@ export const Loader = ({ setPlay, started, setloading, handleClickAudio }) => {
     >
       <div className="background pointer-events-none fixed top-0 left-0 bg-[--bg] w-screen h-screen z-10" />
       <div />
-      <Lottie loop={false} className="LoadIcon  z-20" animationData={loader} />
+      <Lottie loop={false} className="LoadIcon  z-20" animationData={data} />
 
       <button
         onClick={started ? handleLoading : null}
