@@ -4,7 +4,7 @@ import Menu from "./Menu";
 import Tarjeta from "./Tarjeta";
 import { Button } from "./ui/Button";
 import { togglePlay } from "../helpers/helper";
-import data from "../assets/data.json";
+import data from "../assets/data";
 import { LogoImagen } from "./loader/LogoImagen";
 import Reserva from "../components/Reservas";
 
@@ -61,11 +61,13 @@ const VideoPlayer = ({
     const showButton = (buttonRef, start, sumaTotal) => {
       gsap.to(buttonRef.current, {
         opacity: 1,
+        pointerEvents: "all",
         translateY: "0%",
         duration: 0.5,
         delay: start,
         onComplete: () => {
           gsap.to(buttonRef.current, {
+            pointerEvents: "none",
             opacity: 0,
             translateY: "40%",
             duration: 1,

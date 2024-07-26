@@ -1,60 +1,82 @@
 [
-    {
-      "id": 1,
-      "title": "Terraza",
-      "videoSrc": "../src/assets/playa.mp4",
-      "images": ["../src/assets/fotoTarjeta.jpg", "../src/assets/fotoTarjeta.jpg"],
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nunc nunc, hendrerit ac feugiat in, pulvinar at est. Proin suscipit ante ac augue fermentum placerat. Ut rhoncus ut quam ac imperdiet. Vivamus pretium fringilla nisi, sit amet dictum eros fringilla in. Aliquam posuere risus in purus ultricies molestie. Morbi accumsan metus ut purus tristique rutrum. Duis malesuada facilisis lacus vel viverra. Aliquam erat volutpat."
-    },
-    {
-      "id": 2,
-      "title": "Habitacion_secundaria",
-      "videoSrc": "../src/assets/playa.mp4",
-      "images": ["../src/assets/fotoTarjeta.jpg", "../src/assets/fotoTarjeta.jpg"],
-      "description": "Descripción de la habitación principal."
-    },
-    {
-        "id": 3,
-        "title": "Cocina",
-        "videoSrc": "../src/assets/playa.mp4",
-        "images": ["../src/assets/fotoTarjeta.jpg", "../src/assets/fotoTarjeta.jpg"],
-          "description": "Descripción de la habitación principal."
-      },
-      {
-        "id": 4,
-        "title": "Piscina",
-        "videoSrc": "../src/assets/playa.mp4",
-        "images": ["../src/assets/fotoTarjeta.jpg", "../src/assets/fotoTarjeta.jpg"],
-          "description": "Descripción de la habitación principal."
-      },
-      {
-        "id": 5,
-        "title": "Habitacion_principal",
-        "videoSrc": "../src/assets/playa.mp4",
-        "images": ["../src/assets/fotoTarjeta.jpg", "../src/assets/fotoTarjeta.jpg"],
-          "description": "Descripción de la habitación principal."
-      },
-      {
-        "id": 6,
-        "title": "Comedor",
-        "videoSrc": "../src/assets/playa.mp4",
-        "images": ["../src/assets/fotoTarjeta.jpg", "../src/assets/fotoTarjeta.jpg"],
-          "description": "Descripción de la habitación principal."
-      },
-      {
-        "id": 7,
-        "title": "Habitacion_auxiliar",
-        "videoSrc": "../src/assets/playa.mp4",
-        "images": ["../src/assets/fotoTarjeta.jpg", "../src/assets/fotoTarjeta.jpg"],
-          "description": "Descripción de la habitación principal."
-      },
-      {
-        "id": 8,
-        "title": "Playa",
-        "videoSrc": "../src/assets/playa.mp4",
-        "images": ["../src/assets/fotoTarjeta.jpg", "../src/assets/fotoTarjeta.jpg"],
-          "description": "Descripción de la habitación principal."
-      }
-    
-  ]
-  
+  {
+    "id": 1,
+    "title": "Terraza",
+    "videoSrc": "/videos/playa.mp4",
+    "images": [
+      "/imagenes-tarjetas/fotoTarjeta.jpg",
+      "/imagenes-tarjetas/fotoTarjeta.jpg"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nunc nunc, hendrerit ac feugiat in, pulvinar at est. Proin suscipit ante ac augue fermentum placerat. Ut rhoncus ut quam ac imperdiet. Vivamus pretium fringilla nisi, sit amet dictum eros fringilla in. Aliquam posuere risus in purus ultricies molestie. Morbi accumsan metus ut purus tristique rutrum. Duis malesuada facilisis lacus vel viverra. Aliquam erat volutpat."
+  },
+  {
+    "id": 2,
+    "title": "Habitacion_secundaria",
+    "videoSrc": "/videos/playa.mp4",
+    "images": [
+      "/imagenes-tarjetas/fotoTarjeta.jpg",
+      "/imagenes-tarjetas/fotoTarjeta.jpg"
+    ],
+    "description": "Descripción de la habitación principal."
+  },
+  {
+    "id": 3,
+    "title": "Cocina",
+    "videoSrc": "/videos/playa.mp4",
+    "images": [
+      "/imagenes-tarjetas/fotoTarjeta.jpg",
+      "/imagenes-tarjetas/fotoTarjeta.jpg"
+    ],
+    "description": "Descripción de la habitación principal."
+  },
+  {
+    "id": 4,
+    "title": "Piscina",
+    "videoSrc": "/videos/playa.mp4",
+    "images": [
+      "/imagenes-tarjetas/fotoTarjeta.jpg",
+      "/imagenes-tarjetas/fotoTarjeta.jpg"
+    ],
+    "description": "Descripción de la habitación principal."
+  },
+  {
+    "id": 5,
+    "title": "Habitacion_principal",
+    "videoSrc": "/videos/playa.mp4",
+    "images": [
+      "/imagenes-tarjetas/fotoTarjeta.jpg",
+      "/imagenes-tarjetas/fotoTarjeta.jpg"
+    ],
+    "description": "Descripción de la habitación principal."
+  },
+  {
+    "id": 6,
+    "title": "Comedor",
+    "videoSrc": "/videos/playa.mp4",
+    "images": [
+      "/imagenes-tarjetas/fotoTarjeta.jpg",
+      "/imagenes-tarjetas/fotoTarjeta.jpg"
+    ],
+    "description": "Descripción de la habitación principal."
+  },
+  {
+    "id": 7,
+    "title": "Habitacion_auxiliar",
+    "videoSrc": "/videos/playa.mp4",
+    "images": [
+      "/imagenes-tarjetas/fotoTarjeta.jpg",
+      "/imagenes-tarjetas/fotoTarjeta.jpg"
+    ],
+    "description": "Descripción de la habitación principal."
+  },
+  {
+    "id": 8,
+    "title": "Playa",
+    "videoSrc": "/videos/playa.mp4",
+    "images": [
+      "/imagenes-tarjetas/fotoTarjeta.jpg",
+      "/imagenes-tarjetas/fotoTarjeta.jpg"
+    ],
+    "description": "Descripción de la habitación principal."
+  }
+]

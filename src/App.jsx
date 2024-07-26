@@ -3,7 +3,6 @@ import { Loader } from "./components/loader/Loader";
 import StartButton from "./components/StartButton";
 import VideoPlayer from "./components/VideoPlayer";
 import "./index.css"; // Asegúrate de importar Tailwind CSS
-import videoCasa from "./assets/playa.mp4";
 
 const App = () => {
   const [play, setPlay] = useState(false);
@@ -35,7 +34,7 @@ const App = () => {
       <VideoPlayer
         audioRef={audioRef}
         setPlay={setPlay}
-        videoSrc={videoCasa}
+        videoSrc={"/videos/playa.mp4"}
         setStarted={setStarted}
         started={started}
         play={play}
