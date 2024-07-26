@@ -31,7 +31,7 @@ const Tarjeta = ({ videoSrc, images, title, description, onClose }) => {
   };
 
   return (
-    <div className="relative z-50 flex">
+    <div className="relative z-[55] flex">
       <div className="fixed flex flex-col top-0 left-0 h-screen bg-[#fffdf8] w-[600px] items-center p-14">
         <div className="flex flex-col justify-center h-full">
           <div className="w-full">
@@ -72,7 +72,7 @@ const Tarjeta = ({ videoSrc, images, title, description, onClose }) => {
       </div>
 
       {selectedImage && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm">
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-[54] backdrop-blur-sm">
           <div className="relative w-4/5 h-4/5 rounded-xl flex items-center justify-center">
             <button
               onClick={handlePrevImage}
