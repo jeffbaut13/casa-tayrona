@@ -16,7 +16,6 @@ const tiempo = [
   { Habitación_principal: [52, 56] },
   { Comedor: [63, 66] },
   { Habitación_auxiliar: [70, 72] },
-  { Playa: [86, 90] },
 ];
 
 const nombres = tiempo.map((obj) => Object.keys(obj)[0]);
