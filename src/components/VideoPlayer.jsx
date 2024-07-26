@@ -10,12 +10,12 @@ import Reserva from "../components/Reservas";
 
 const tiempo = [
   { Terraza: [4, 10] },
-  { Habitacion_secundaria: [14, 20] },
+  { Habitación_secundaria: [14, 20] },
   { Cocina: [23, 29] },
   { Piscina: [34, 39] },
-  { Habitacion_principal: [52, 56] },
+  { Habitación_principal: [52, 56] },
   { Comedor: [63, 66] },
-  { Habitacion_auxiliar: [70, 72] },
+  { Habitación_auxiliar: [70, 72] },
   { Playa: [86, 90] },
 ];
 

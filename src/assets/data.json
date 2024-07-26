@@ -12,7 +12,7 @@
   },
   {
     "id": 2,
-    "title": "Habitacion_secundaria",
+    "title": "Habitación_secundaria",
     "videoSrc": "/videos/playa.mp4",
     "images": [
       "/imagenes-tarjetas/secundaria1.jpg",
@@ -45,7 +45,7 @@
   },
   {
     "id": 5,
-    "title": "Habitacion_principal",
+    "title": "Habitación_principal",
     "videoSrc": "/videos/playa.mp4",
     "images": [
       "/imagenes-tarjetas/principal1.jpg",
@@ -67,7 +67,7 @@
   },
   {
     "id": 7,
-    "title": "Habitacion_auxiliar",
+    "title": "Habitación_auxiliar",
     "videoSrc": "/videos/playa.mp4",
     "images": [
       "/imagenes-tarjetas/auxiliar1.jpg",
