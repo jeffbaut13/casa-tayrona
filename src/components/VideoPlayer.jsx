@@ -125,6 +125,7 @@ const VideoPlayer = ({
         loop
         muted
         playsInline
+        onLoadedMetadata={() => setStarted(true)}
       />
 
       {started && (
