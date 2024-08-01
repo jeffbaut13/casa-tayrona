@@ -78,7 +78,7 @@ export const Loader = ({ setPlay, started, setloading, handleClickAudio }) => {
   <div className="flex justify-center w-full mb-8">
     <button
       onClick={started ? handleLoading : null}
-      className="btnInicio flex justify-center items-center blackerMedium z-20 text-[--bg] border-2 border-[--bg] py-1 px-16 mb-32 text-xl"
+      className="btnInicio flex justify-center items-center blackerMedium z-[170] text-[--bg] border-2 border-[--bg] py-1 px-16 mb-32 text-xl"
     >
       {!started ? (
         <figure className="inline-block h-6 w-6">

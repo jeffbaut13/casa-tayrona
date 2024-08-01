@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import imagencerrar from "/imagenes-tarjetas/cerrarTarjeta.svg";
+import imagencerrar from "/imagenes-tarjetas/cerrargaleria.svg";
 import izq from "/imagenes-tarjetas/flechaizimagen.svg";
 import der from "/imagenes-tarjetas/flechaderimagen.svg";
 import cer from "/imagenes-tarjetas/cerrargaleria.svg";
@@ -31,43 +31,39 @@ const Tarjeta = ({ videoSrc, images, title, description, onClose }) => {
   };
 
   return (
-    <div className="relative z-[55] flex">
-      <div className="fixed flex flex-col top-0 left-0 h-screen bg-[#fffdf8] w-[600px] items-center p-14">
-        <div className="flex flex-col justify-center h-full">
-          <div className="w-full">
-            <video
-              src={`../${videoSrc}`}
-              className="w-full z-[70] rounded-xl"
-              loop
-              muted
-              playsInline
-              controls
-            />
-          </div>
-          <div className="flex justify-between z-[70] w-full my-4 overflow-hidden min-h-24">
-            {images.map((imgSrc, index) => (
-              <img
-                key={index}
-                src={imgSrc}
-                className="w-1/4 h-auto object-contain rounded-3xl cursor-pointer"
-                onClick={() => handleImageClick(index)}
-              />
-            ))}
-          </div>
-          <div className="text-[--primary] flex">
-            <h1 className="font-bold text-3xl ">{title.replace(/_/g, " ")}</h1>
-            <p
-              dangerouslySetInnerHTML={{ __html: description }}
-              className="mx-3 text-xs ml-8"
-            />
-          </div>
+    <div className="fixed top-0 left-0 w-full h-full z-[55] flex items-center justify-center backdrop-blur-xl bg-gray-900 bg-opacity-35">
+      <div className="flex  items-center w-11/12 max-w-[70%] relative">
+        <button onClick={onClose} className="absolute top-4 right-4">
+          <img src={imagencerrar} className="w-8" />
+        </button>
+        <div className=" w-1/2">
+        <div className="w-full">
+          <video
+            src={`../${videoSrc}`}
+            className="w-full z-[70] rounded-xl"
+            loop
+            muted
+            playsInline
+            controls
+          />
         </div>
-      </div>
-      <div className="fixed top-0 left-[600px] iconocerrar w-[50px] p-0 h-full">
-        <div className="flex flex-col justify-center h-full">
-          <button onClick={onClose}>
-            <img src={imagencerrar} className="w-full" />
-          </button>
+        <div className="flex justify-between z-[70] w-full my-4 overflow-hidden">
+          {images.slice(0, 3).map((imgSrc, index) => (
+            <img
+              key={index}
+              src={imgSrc}
+              className=" w-1/3 h-auto object-contain rounded-xl px-2 cursor-pointer"
+              onClick={() => handleImageClick(index)}
+            />
+          ))}
+        </div>
+        </div>
+        <div className="text-[--bg] flex flex-col items-start w-1/2 ml-8">
+          <h1 className="font-bold text-3xl">{title.replace(/_/g, " ")}</h1>
+          <p
+            dangerouslySetInnerHTML={{ __html: description }}
+            className="text-start text-sm mt-2 w-11/12"
+          />
         </div>
       </div>
 
@@ -90,9 +86,9 @@ const Tarjeta = ({ videoSrc, images, title, description, onClose }) => {
           </div>
           <button
             onClick={handleCloseImage}
-            className="absolute top-4 "
+            className="absolute top-4 right-4"
           >
-            <img src={cer} className="w-14" />
+            <img src={cer} className="w-8" />
           </button>
         </div>
       )}

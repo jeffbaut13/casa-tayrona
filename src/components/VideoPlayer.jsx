@@ -1,24 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
-import { gsap } from "gsap";
 import Menu from "./Menu";
 import Tarjeta from "./Tarjeta";
-import { Button } from "./ui/Button";
-import { togglePlay } from "../helpers/helper";
 import data from "../assets/data";
 import { LogoImagen } from "./loader/LogoImagen";
 import Reserva from "../components/Reservas";
-
-const tiempo = [
-  { Terraza: [4, 10] },
-  { Habitación_secundaria: [14, 20] },
-  { Cocina: [23, 29] },
-  { Piscina: [34, 39] },
-  { Habitación_principal: [52, 56] },
-  { Comedor: [63, 66] },
-  { Habitación_auxiliar: [70, 72] },
-];
-
-const nombres = tiempo.map((obj) => Object.keys(obj)[0]);
+import AudioPlayer from "./audio/AudioPlayer";
+import audioMusic from "../assets/audioMusic.mp3";
 
 const VideoPlayer = ({
   videoSrc,
@@ -31,52 +18,8 @@ const VideoPlayer = ({
   audioRef,
 }) => {
   const videoRef = useRef(null);
-  const refs = useRef(
-    nombres.reduce((acc, value) => {
-      acc[value] = React.createRef();
-      return acc;
-    }, {})
-  );
   const [showTarjeta, setShowTarjeta] = useState(false);
   const [showReserva, setShowReserva] = useState(false);
-
-  useEffect(() => {
-    const video = videoRef.current;
-
-    const showButton = (buttonRef, start, sumaTotal) => {
-      gsap.to(buttonRef.current, {
-        opacity: 1,
-        pointerEvents: "all",
-        translateY: "0%",
-        duration: 0.5,
-        delay: start,
-        onComplete: () => {
-          gsap.to(buttonRef.current, {
-            pointerEvents: "none",
-            opacity: 0,
-            translateY: "40%",
-            duration: 1,
-            delay: sumaTotal - start,
-          });
-        },
-      });
-    };
-
-    video.addEventListener("timeupdate", () => {
-      const currentTime = video.currentTime;
-
-      tiempo.forEach((obj, index) => {
-        const key = Object.keys(obj)[0];
-        const [start, end] = obj[key];
-
-        const resta = end - start;
-        const buttonRef = refs.current[key];
-        if (currentTime >= start && currentTime < end) {
-          showButton(buttonRef, 0, resta);
-        }
-      });
-    });
-  }, []);
 
   useEffect(() => {
     if (play) {
@@ -107,6 +50,29 @@ const VideoPlayer = ({
 
   return (
     <div className="absolute z-0 top-0 left-0 w-full h-full overflow-hidden">
+      <div className="absolute top-[25%] left-1/2 transform -translate-x-1/2 flex bor rounded-xl px-4 z-[50] centrarContacto">
+        <button
+          onClick={handleShowReserva}
+          className="text-[--primary] hover:text-[#0090b2] transition-colors flex flex-col items-start text-start px-14 py-3 bg-[#f4efdf90] hover:bg-[--bg] rounded-l-xl"
+        >
+          <span className=" text-[15px] font-bold">Llegada</span><span className=" text-xs opacity-70">Escoge fecha</span>
+        </button>
+        <button
+          onClick={handleShowReserva}
+          className="relative text-[--primary] hover:text-[#0090b2] transition-colors flex flex-col items-start px-14 py-3 bg-[#f4efdf90] hover:bg-[--bg]"
+        >
+          <span className="text-[15px]">Salida</span><span className="text-xs opacity-70">Escoge fecha</span>
+          <span className="absolute top-2 bottom-2 left-0 w-0.5 bg-[--primary]"></span>
+          <span className="absolute top-2 bottom-2 right-0 w-0.5 bg-[--primary]"></span>
+        </button>
+        <button
+          onClick={handleShowReserva}
+          className="text-[--primary] hover:text-[#0090b2] transition-colors flex flex-col items-start px-14 py-3 bg-[#f4efdf90] hover:bg-[--bg] rounded-r-xl"
+        >
+          <span className="text-[15px]">Quien</span><span className="text-xs opacity-70">¿Cuantos?</span>
+        </button>
+      </div>
+
       <Menu
         audioRef={audioRef}
         handleShowReserva={handleShowReserva}
@@ -127,24 +93,6 @@ const VideoPlayer = ({
         onLoadedMetadata={() => setStarted(true)}
       />
 
-      {started && (
-        <div
-          //onClick={() => togglePlay(play, setPlay)}
-          className="absolute bottom-12 left-12 z-10 w-[32rem] h-28 flex items-center"
-        >
-          <div className="relative w-full h-full">
-            {nombres.map((nombre, index) => (
-              <Button
-                handleclick={() => handleShowTarjeta(nombre)}
-                key={index}
-                buRef={refs.current[nombre]}
-                title={nombre.replace(/_/g, " ")}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-
       {showTarjeta && (
         <Tarjeta
           videoSrc={showTarjeta.videoSrc}
@@ -154,6 +102,17 @@ const VideoPlayer = ({
           onClose={handleHideTarjeta}
         />
       )}
+
+      {/* Botón de Contacto y Reserva */}
+
+      {/* Componente AudioPlayer movido aquí */}
+      <AudioPlayer
+        audioRef={audioRef}
+        audioSrc={audioMusic}
+        isPlaying={isPlaying}
+        handleClickAudio={handleClickAudio}
+        active={true}
+      />
     </div>
   );
 };

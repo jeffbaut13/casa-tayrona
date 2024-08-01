@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import data from "../assets/data";
 import { gsap } from "gsap";
-import HamburgesaIcon from "./HamburguesaIcon";
-import AudioPlayer from "./audio/AudioPlayer";
-import audioMusic from "../assets/audioMusic.mp3";
+
+const tiempo = [
+  { Terraza: [4, 10] },
+  { Habitación_secundaria: [14, 20] },
+  { Cocina: [23, 29] },
+  { Piscina: [34, 39] },
+  { Habitación_principal: [52, 56] },
+  { Comedor: [63, 66] },
+  { Habitación_auxiliar: [70, 72] },
+];
+
+const nombres = tiempo.map((obj) => Object.keys(obj)[0]);
 
 const Menu = ({
   onButtonClick,
@@ -11,145 +21,140 @@ const Menu = ({
   audioRef,
   handleShowReserva,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const menuRef = React.useRef(null);
   const [hover, setHover] = useState(false);
+  const refs = useRef(
+    nombres.reduce((acc, value) => {
+      acc[value] = {
+        imageRef: React.createRef(),
+        buttonRef: React.createRef(),
+      };
+      return acc;
+    }, {})
+  );
 
-  const toggleMenu = () => {
-    setIsOpen((prev) => {
-      const isExpanding = !prev;
-      gsap.to(menuRef.current, {
-        width: isExpanding ? "400px" : "100px",
+  useEffect(() => {
+    const showImage = (imageRef, start, sumaTotal, buttonRef) => {
+      gsap.to(imageRef.current, {
+        opacity: 1,
+        pointerEvents: "all",
         duration: 0.5,
-        ease: "power2.out",
+        delay: start,
+        onComplete: () => {
+          gsap.to(imageRef.current, {
+            pointerEvents: "none",
+            opacity: 0,
+            duration: 1,
+            delay: sumaTotal - start,
+          });
+        },
       });
-      return isExpanding;
-    });
-  };
+
+      // Animar el tamaño del texto del botón
+      gsap.to(buttonRef.current, {
+        scale: 1.8,
+        duration: 1.5,
+        ease: "easeInOut",
+        delay: start,
+        opacity: 1,
+        onComplete: () => {
+          gsap.to(buttonRef.current, {
+            scale: 1,
+            duration: 3,
+            opacity: 0.4,
+            ease: "easeInOut",
+            delay: sumaTotal - start,
+          });
+        },
+      });
+    };
+
+    const video = document.querySelector("video");
+
+    const handleTimeUpdate = () => {
+      const currentTime = video.currentTime;
+
+      tiempo.forEach((obj) => {
+        const key = Object.keys(obj)[0];
+        const [start, end] = obj[key];
+
+        const resta = end - start;
+        const imageRef = refs.current[key]?.imageRef;
+        const buttonRef = refs.current[key]?.buttonRef;
+
+        if (currentTime >= start && currentTime < end) {
+          showImage(imageRef, 0, resta, buttonRef);
+        }
+      });
+    };
+
+    video.addEventListener("timeupdate", handleTimeUpdate);
+    return () => {
+      video.removeEventListener("timeupdate", handleTimeUpdate);
+    };
+  }, []);
 
   const handleButtonClick = (buttonName) => {
-    onButtonClick(buttonName); // Show the Reserva component
-
-    toggleMenu(); // Close the menu after a button click
+    onButtonClick(buttonName);
   };
 
-  const cerrarAbrirCart = () => {
-    handleShowReserva();
-    toggleMenu();
-  };
-
-  console.log(hover);
   return (
     <div
-      className="relative z-[51]"
+      className="fixed bottom-20 left-0 w-full text-[--bg] transition-colors duration-500 ease-out z-[51]"
       onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => {
-        setHover(false);
-      }}
+      onMouseLeave={() => setHover(false)}
     >
-      <div
-        ref={menuRef}
-        className={`fixed top-0 right-0 h-screen bg-[#6b728030] hover:bg-[#fffdf8] text-[#623e2a] transition-width duration-500 ease-out overflow-hidden ${
-          isOpen ? "w-[400px] bg-[#fffdf8]" : "w-[100px]"
-        }`}
-      >
-        <div
-          className="absolute top-4 right-8 cursor-pointer"
-          onClick={toggleMenu}
-        >
-          <HamburgesaIcon active={isOpen} hover={hover} />
+      <div className="flex justify-center py-4">
+        <div className="w-[70%] flex flex-wrap justify-around items-center">
+          {nombres.map((nombre) => {
+            const tarjetaData = data.find((item) => item.title === nombre);
+            return (
+              <div key={nombre} className="relative flex flex-col items-center">
+                <div
+                  ref={refs.current[nombre].imageRef}
+                  className="opacity-0 pointer-events-none absolute bottom-full mb-2 transition-all duration-500 ease-in-out flex flex-col items-center"
+                >
+                  <div className="grid grid-cols-2 gap-1 w-40">
+                    {tarjetaData.images.slice(0, 2).map((imgSrc, imgIndex) => (
+                      <img
+                        key={imgIndex}
+                        src={imgSrc}
+                        alt={`${nombre.replace(/_/g, " ")} ${imgIndex + 1}`}
+                        className="h-auto object-cover rounded-lg"
+                      />
+                    ))}
+                  </div>
+                  <div>
+                    <button
+                      className="w-40 bg-[--bg] text-[--primary] mt-2 rounded-md"
+                      onClick={() => handleButtonClick(nombre)}
+                    >
+                      Ver más
+                    </button>
+                  </div>
+                </div>
+                <button
+                  ref={refs.current[nombre].buttonRef}
+                  onClick={() => handleButtonClick(nombre)}
+                  className="hover:text-[#0090b2] transition-colors mt-4 text-button opacity-40 flex flex-col items-center"
+                >
+                  {nombre
+                    .replace(/_/g, " ")
+                    .split(" ")
+                    .map((word, index) => (
+                      <span
+                        key={index}
+                        className="leading-tight"
+                      >
+                        {word}
+                      </span>
+                    ))}
+                </button>
+              </div>
+            );
+          })}
         </div>
-
-        {/* Texts when hover */}
-        {!isOpen && hover && (
-          <>
-            <div className="absolute top-1/2 right-0 flex items-center justify-center -rotate-90 w-full whitespace-nowrap">
-              <button
-                onClick={cerrarAbrirCart}
-                className="uppercase block hover:text-[#0090b2] transition-colors"
-              >
-                Contacto y reserva
-              </button>
-            </div>
-          </>
-        )}
-        <AudioPlayer
-          audioRef={audioRef}
-          audioSrc={audioMusic}
-          isPlaying={isPlaying}
-          handleClickAudio={handleClickAudio}
-          active={isOpen}
-          hover={hover}
-        />
-
-        {/* Buttons in expanded menu */}
-        {isOpen && (
-          <div className="flex flex-col h-full items-center justify-center">
-            <div className="flex flex-col w-1/2 whitespace-nowrap">
-              <h1 className="font-bold text-2xl">Interiores</h1>
-              <button
-                onClick={() => handleButtonClick("Habitación_principal")}
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
-              >
-                Habitación principal
-              </button>
-              <button
-                onClick={() => handleButtonClick("Habitación_secundaria")}
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
-              >
-                Habitaciones secundarias
-              </button>
-              <button
-                onClick={() => handleButtonClick("Habitación_auxiliar")}
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
-              >
-                Habitaciones auxiliar
-              </button>
-              <button
-                onClick={() => handleButtonClick("Cocina")}
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
-              >
-                Cocina
-              </button>
-              <button
-                onClick={() => handleButtonClick("Comedor")}
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
-              >
-                Comedor
-              </button>
-            </div>
-            <div className="flex flex-col w-1/2 mt-10 whitespace-nowrap">
-              <h1 className="mt-4 font-bold text-2xl">Exteriores</h1>
-              <button
-                onClick={() => handleButtonClick("Terraza")}
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
-              >
-                Terraza
-              </button>
-              <button
-                onClick={() => handleButtonClick("Piscina")}
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
-              >
-                Piscina
-              </button>
-              <button
-                onClick={() => handleButtonClick("Playa")}
-                className="hover:text-[#0090b2] transition-colors mt-4 pl-4 text-start"
-              >
-                Playa
-              </button>
-            </div>
-            <div className="flex flex-col w-1/2 mt-10 font-bold whitespace-nowrap">
-              <button
-                onClick={cerrarAbrirCart}
-                className="block hover:text-[#0090b2] transition-colors px-2 text-start"
-              >
-                Contacto y Reserva
-              </button>
-            </div>
-          </div>
-        )}
       </div>
+      <div className="w-[70%] border-t-2 border-[--bg] opacity-40 mx-auto mt-0"></div>
     </div>
   );
 };

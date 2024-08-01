@@ -42,23 +42,8 @@ const Reserva = ({ onClose }) => {
         >
           <img src="/imagenes-tarjetas/cerrargaleria.svg" alt="" />
         </figure>
+        
 
-        <figure
-          onClick={handlePrev}
-          className="cursor-pointer w-16 h-16 rotate-180 z-20"
-        >
-          <img src="/imagenes-tarjetas/flechaderimagen.svg" alt="" />
-        </figure>
-        <figure className="w-fit h-2/3 mx-12 z-20">
-          <img
-            className="w-full h-full object-contain"
-            src={`/img${currentImageIndex}.png`}
-            alt=""
-          />
-        </figure>
-        <figure onClick={handleNext} className="cursor-pointer w-16 h-16 z-20">
-          <img src="/imagenes-tarjetas/flechaderimagen.svg" alt="" />
-        </figure>
       </div>
     </div>
   );
