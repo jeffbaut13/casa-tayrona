@@ -195,14 +195,14 @@ const VideoPlayer = ({
                 <div className="flex items-center mt-2">
                   <button
                     onClick={() => setAdults(Math.max(0, adults - 1))}
-                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-full"
+                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-md"
                   >
                     −
                   </button>
                   <span className="mx-4">{adults}</span>
                   <button
                     onClick={() => setAdults(adults + 1)}
-                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-full"
+                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-md"
                   >
                     +
                   </button>
@@ -214,14 +214,14 @@ const VideoPlayer = ({
                 <div className="flex items-center mt-2">
                   <button
                     onClick={() => setChildren(Math.max(0, children - 1))}
-                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-full"
+                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-md"
                   >
                     −
                   </button>
                   <span className="mx-4">{children}</span>
                   <button
                     onClick={() => setChildren(children + 1)}
-                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-full"
+                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-md"
                   >
                     +
                   </button>
@@ -233,14 +233,14 @@ const VideoPlayer = ({
                 <div className="flex items-center mt-2">
                   <button
                     onClick={() => setInfants(Math.max(0, infants - 1))}
-                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-full"
+                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-md"
                   >
                     −
                   </button>
                   <span className="mx-4">{infants}</span>
                   <button
                     onClick={() => setInfants(infants + 1)}
-                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-full"
+                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-md"
                   >
                     +
                   </button>
@@ -251,14 +251,14 @@ const VideoPlayer = ({
                 <div className="flex items-center mt-2">
                   <button
                     onClick={() => setPets(Math.max(0, pets - 1))}
-                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-full"
+                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-md"
                   >
                     −
                   </button>
                   <span className="mx-4">{pets}</span>
                   <button
                     onClick={() => setPets(pets + 1)}
-                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-full"
+                    className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-md"
                   >
                     +
                   </button>
