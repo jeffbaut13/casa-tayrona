@@ -8,6 +8,7 @@ import AudioPlayer from "./audio/AudioPlayer";
 import audioMusic from "../assets/audioMusic.mp3";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "../react-datepicker.css"
 
 const VideoPlayer = ({
   videoSrc,
