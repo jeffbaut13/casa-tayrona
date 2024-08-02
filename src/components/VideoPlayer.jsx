@@ -248,7 +248,7 @@ const VideoPlayer = ({
               </div>
               <div className="flex flex-col items-center">
                 <span className="font-bold">Mascotas</span>
-                <div className="flex items-center mt-2">
+                <div className="flex items-center my-6">
                   <button
                     onClick={() => setPets(Math.max(0, pets - 1))}
                     className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-md"
