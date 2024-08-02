@@ -6,6 +6,8 @@ import { LogoImagen } from "./loader/LogoImagen";
 import Reserva from "../components/Reservas";
 import AudioPlayer from "./audio/AudioPlayer";
 import audioMusic from "../assets/audioMusic.mp3";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const VideoPlayer = ({
   videoSrc,
@@ -20,6 +22,10 @@ const VideoPlayer = ({
   const videoRef = useRef(null);
   const [showTarjeta, setShowTarjeta] = useState(false);
   const [showReserva, setShowReserva] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [isStartDatePicker, setIsStartDatePicker] = useState(true);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   useEffect(() => {
     if (play) {
@@ -48,20 +54,30 @@ const VideoPlayer = ({
     setShowReserva(false);
   };
 
+  const handleShowCalendar = () => {
+    setShowCalendar(true);
+  };
+
+  const handleHideCalendar = () => {
+    setShowCalendar(false);
+  };
+
   return (
     <div className="absolute z-0 top-0 left-0 w-full h-full overflow-hidden">
       <div className="absolute top-[25%] left-1/2 transform -translate-x-1/2 flex bor rounded-xl px-4 z-[50] centrarContacto">
         <button
-          onClick={handleShowReserva}
+          onClick={handleShowCalendar}
           className="text-[--primary] hover:text-[#0090b2] transition-colors flex flex-col items-start text-start px-14 py-3 bg-[#f4efdf90] hover:bg-[--bg] rounded-l-xl"
         >
-          <span className=" text-[15px] font-bold">Llegada</span><span className=" text-xs opacity-70">Escoge fecha</span>
+          <span className="text-[15px] font-bold">Ida/vuelta</span>
+          <span className="text-xs opacity-70">Escoge fecha</span>
         </button>
         <button
           onClick={handleShowReserva}
           className="relative text-[--primary] hover:text-[#0090b2] transition-colors flex flex-col items-start px-14 py-3 bg-[#f4efdf90] hover:bg-[--bg]"
         >
-          <span className="text-[15px]">Salida</span><span className="text-xs opacity-70">Escoge fecha</span>
+          <span className="text-[15px]">Quien</span>
+          <span className="text-xs opacity-70">¿Cuántos?</span>
           <span className="absolute top-2 bottom-2 left-0 w-0.5 bg-[--primary]"></span>
           <span className="absolute top-2 bottom-2 right-0 w-0.5 bg-[--primary]"></span>
         </button>
@@ -69,7 +85,7 @@ const VideoPlayer = ({
           onClick={handleShowReserva}
           className="text-[--primary] hover:text-[#0090b2] transition-colors flex flex-col items-start px-14 py-3 bg-[#f4efdf90] hover:bg-[--bg] rounded-r-xl"
         >
-          <span className="text-[15px]">Quien</span><span className="text-xs opacity-70">¿Cuantos?</span>
+          <span className="text-[15px]">Reservar</span>
         </button>
       </div>
 
@@ -81,6 +97,72 @@ const VideoPlayer = ({
         handleClickAudio={handleClickAudio}
       />
       {showReserva && <Reserva onClose={handleHideReserva} />}
+      {showCalendar && (
+        <div className="fixed top-[34%] left-1/2 transform -translate-x-1/2 z-[70]  flex text-[#515151] text-[15px] items-center">
+          <div className="bg-[#FFFDF8] px-16 py-8 rounded-lg shadow-lg relative w-[520px] h-[400px] mx-auto">
+            <button
+              onClick={handleHideCalendar}
+              className="absolute top-4 right-4 text-gray-500 hover:text-black"
+            >
+              &times;
+            </button>
+            <h2 className="mb-4 text-center">Agrega las fechas de tu viaje y obtén los precios exactos</h2>
+            <div className="flex justify-between mb-4 p-[2px] bg-[#EDE9DD] rounded-md">
+              <button
+                onClick={() => setIsStartDatePicker(true)}
+                className={`w-1/2  pr-2 ${isStartDatePicker ? 'bg-white rounded-md' : ''}`}
+              >
+                Llegada:
+              </button>
+              <button
+                onClick={() => setIsStartDatePicker(false)}
+                className={`w-1/2 pl-2 ${!isStartDatePicker ? 'bg-white rounded-md' : ''}`}
+              >
+                Salida:
+              </button>
+            </div>
+            <div className="mb-0">
+              {isStartDatePicker ? (
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  selectsStart
+                  startDate={startDate}
+                  endDate={endDate}
+                  inline
+                />
+              ) : (
+                <DatePicker
+                  selected={endDate}
+                  onChange={(date) => setEndDate(date)}
+                  selectsEnd
+                  startDate={startDate}
+                  endDate={endDate}
+                  minDate={startDate}
+                  inline
+                />
+              )}
+            </div>
+            <div className="flex justify-between">
+              <button
+                onClick={() => {
+                  setStartDate(null);
+                  setEndDate(null);
+                }}
+                className="text-gray-500"
+              >
+                Restablecer
+              </button>
+              <button
+                onClick={handleHideCalendar}
+                className="bg-black text-white px-4 py-1 rounded"
+              >
+                Aceptar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <LogoImagen />
       <div className="bg-gradient-to-b from-[#00000070] via-transparent to-[#000000a1] fixed z-[1] top-0 left-0 w-screen h-screen pointer-events-none" />
       <video
@@ -103,9 +185,6 @@ const VideoPlayer = ({
         />
       )}
 
-      {/* Botón de Contacto y Reserva */}
-
-      {/* Componente AudioPlayer movido aquí */}
       <AudioPlayer
         audioRef={audioRef}
         audioSrc={audioMusic}
