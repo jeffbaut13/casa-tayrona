@@ -78,7 +78,7 @@ export const Loader = ({ setPlay, started, setloading, handleClickAudio }) => {
   <div className="flex justify-center w-full mb-8">
     <button
       onClick={started ? handleLoading : null}
-      className="btnInicio flex justify-center items-center blackerMedium z-[170] text-[--bg] border-2 border-[--bg] py-1 px-16 mb-32 text-xl"
+      className="btnInicio flex justify-center items-center blackerMedium z-[170] text-[--bg] border-2 border-[--bg] py-1 px-16 mb-32 text-xl rounded-md"
     >
       {!started ? (
         <figure className="inline-block h-6 w-6">
@@ -97,7 +97,7 @@ export const Loader = ({ setPlay, started, setloading, handleClickAudio }) => {
               strokeWidth="4"
             ></circle>
             <path
-              className="opacity-75"
+              className="opacity-7"
               fill="currentColor"
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             ></path>

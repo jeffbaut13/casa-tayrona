@@ -56,6 +56,8 @@ const Menu = ({
         ease: "easeInOut",
         delay: start,
         opacity: 1,
+        color: "white",
+
         onComplete: () => {
           gsap.to(buttonRef.current, {
             scale: 1,
@@ -63,6 +65,7 @@ const Menu = ({
             opacity: 0.4,
             ease: "easeInOut",
             delay: sumaTotal - start,
+            color: "white",
           });
         },
       });
@@ -104,7 +107,7 @@ const Menu = ({
       onMouseLeave={() => setHover(false)}
     >
       <div className="flex justify-center py-4">
-        <div className="w-[70%] flex flex-wrap justify-around items-center">
+        <div className="w-[60%] flex flex-wrap justify-around items-center">
           {nombres.map((nombre) => {
             const tarjetaData = data.find((item) => item.title === nombre);
             return (
@@ -143,7 +146,7 @@ const Menu = ({
                     .map((word, index) => (
                       <span
                         key={index}
-                        className="leading-tight"
+                        className=" leading-none"
                       >
                         {word}
                       </span>

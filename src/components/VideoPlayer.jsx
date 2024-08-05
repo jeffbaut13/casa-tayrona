@@ -78,6 +78,17 @@ const VideoPlayer = ({
 
   return (
     <div className="absolute z-0 top-0 left-0 w-full h-full overflow-hidden">
+      
+      <AudioPlayer
+        audioRef={audioRef}
+        audioSrc={audioMusic}
+        isPlaying={isPlaying}
+        handleClickAudio={handleClickAudio}
+        active={true}
+      />
+      
+
+      
       <div className="absolute top-[25%] left-1/2 transform -translate-x-1/2 flex bor rounded-xl px-4 z-[50] centrarContacto">
         <button
           onClick={handleShowCalendar}
@@ -92,14 +103,14 @@ const VideoPlayer = ({
         >
           <span className="text-[15px]">Quien</span>
           <span className="text-xs opacity-70">¿Cuántos?</span>
-          <span className="absolute top-2 bottom-2 left-0 w-0.5 bg-[--primary]"></span>
-          <span className="absolute top-2 bottom-2 right-0 w-0.5 bg-[--primary]"></span>
+          <span className="absolute top-2 bottom-2 left-0 w-[1px] bg-[--primary]"></span>
+          <span className="absolute top-2 bottom-2 right-0 w-[0.5px] bg-[--primary]"></span>
         </button>
         <button
           onClick={handleShowReserva}
-          className="text-[--primary] hover:text-[#0090b2] transition-colors flex flex-col items-start px-14 py-3 bg-[#f4efdf90] hover:bg-[--bg] rounded-r-xl"
+          className="text-[--primary] hover:text-[#0090b2] transition-colors flex flex-col items-center justify-center px-14 bg-[#f4efdf90] hover:bg-[--bg] rounded-r-xl"
         >
-          <span className="text-[15px]">Reservar</span>
+          <span className="text-[15px] justify-center items-center">Reservar</span>
         </button>
       </div>
 
@@ -309,13 +320,10 @@ const VideoPlayer = ({
         />
       )}
 
-      <AudioPlayer
-        audioRef={audioRef}
-        audioSrc={audioMusic}
-        isPlaying={isPlaying}
-        handleClickAudio={handleClickAudio}
-        active={true}
-      />
+
+
+
+      
     </div>
   );
 };
