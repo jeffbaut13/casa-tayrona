@@ -77,7 +77,7 @@ const VideoPlayer = ({
   };
 
   return (
-    <div className="absolute z-0 top-0 left-0 w-full h-full overflow-hidden">
+    <div className="absolute z-0 top-0 left-0 w-full h-full overflow-hidden movil">
       
       <AudioPlayer
         audioRef={audioRef}
@@ -90,11 +90,11 @@ const VideoPlayer = ({
 
       
       <div className="absolute top-[25%] left-1/2 transform -translate-x-1/2 flex bor rounded-xl px-4 z-[50] centrarContacto">
-        <button
+{/*         <button
           onClick={handleShowCalendar}
           className="text-[--primary] hover:text-[#0090b2] transition-colors flex flex-col items-start text-start px-14 py-3 bg-[#f4efdf90] hover:bg-[--bg] rounded-l-xl"
         >
-          <span className="text-[15px] font-bold">Ida/vuelta</span>
+          <span className="text-[15px] font-bold">Llegada</span>
           <span className="text-xs opacity-70">Escoge fecha</span>
         </button>
         <button
@@ -112,7 +112,7 @@ const VideoPlayer = ({
         >
           <span className="text-[15px] justify-center items-center">Reservar</span>
         </button>
-      </div>
+ */}      </div>
 
       <Menu
         audioRef={audioRef}
@@ -319,7 +319,11 @@ const VideoPlayer = ({
           onClose={handleHideTarjeta}
         />
       )}
-
+<div className=" absolute bottom-8 left-1/2 transform -translate-x-1/2 w-36  z-[40] ">
+  <button className=" w-full border-2 px-10 py-1 rounded-md bg-[#f4efdf] text-[#623e2a] hover:text-[#f4efdf] hover:bg-[#f4efdf3d]" onClick={handleShowReserva}>
+    Reserva
+  </button>
+</div>
 
 
 

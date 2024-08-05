@@ -10,13 +10,13 @@ const Reserva = ({ onClose }) => {
         >
           <img src="/imagenes-tarjetas/cerrargaleria.svg" alt="Cerrar" />
         </figure>
-        <div className="w-[70%] text-black font-sans flex bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="w-[50%] h-[70%] text-black font-sans flex bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="w-1/2 px-20 py-8">
-            <h1 className="text-2xl font-bold mb-6">Confirma y paga</h1>
-            <div className="mb-6">
-              <h2 className="text-xl font-semibold mb-2">Tu viaje</h2>
+            <h1 className="text-1xl font-bold mb-4">Confirma y paga</h1>
+            <div className="mb-4">
+              <h2 className=" text-sm font-semibold mb-2">Tu viaje</h2>
               <div className="flex justify-between items-center mb-2">
-                <p className="text-sm">Escoge las fechas de tu viaje</p>
+                <p className=" text-xs">Escoge las fechas de tu viaje</p>
                 <button className="text-blue-600 text-sm">Editar</button>
               </div>
               <div className="flex justify-between items-center">
@@ -27,8 +27,8 @@ const Reserva = ({ onClose }) => {
                 ¿Traes un animal de servicio?
               </p>
             </div>
-            <div>
-              <h2 className="text-xl font-semibold mb-2">Paga con</h2>
+{/*             <div>
+              <h2 className="text-1xl font-semibold mb-2">Paga con</h2>
               <div className="mb-4">
                 <label className="block text-sm mb-1">
                   Nombre como aparece en la tarjeta
@@ -71,7 +71,7 @@ const Reserva = ({ onClose }) => {
                 de tu viaje. Reserva pronto para aprovechar esta oferta especial.
               </p>
             </div>
-          </div>
+ */}          </div>
           <div className="w-1/2 bg-black text-white ">
             <div className="h-full flex flex-col">
               <img
