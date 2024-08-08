@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 
 const tiempo = [
   { Terraza: [4, 10] },
-  { Habitación_secundaria: [14, 20] },
+  { Habitación_secundaria: [14, 18] },
   { Cocina: [23, 29] },
   { Piscina: [34, 39] },
   { Habitación_principal: [52, 56] },
@@ -51,7 +51,6 @@ const Menu = ({
 
       // Animar el tamaño del texto del botón
       gsap.to(buttonRef.current, {
-        scale: 1.8,
         duration: 1.5,
         ease: "easeInOut",
         delay: start,
@@ -60,7 +59,6 @@ const Menu = ({
 
         onComplete: () => {
           gsap.to(buttonRef.current, {
-            scale: 1,
             duration: 3,
             opacity: 0.4,
             ease: "easeInOut",
@@ -107,11 +105,12 @@ const Menu = ({
       onMouseLeave={() => setHover(false)}
     >
       <div className="flex justify-center py-4">
-        <div className="w-[60%] flex flex-wrap justify-around items-center">
+        <div className="w-[65%] flex flex-wrap justify-around items-center">
           {nombres.map((nombre) => {
             const tarjetaData = data.find((item) => item.title === nombre);
             return (
-              <div key={nombre} className="relative flex flex-col items-center">
+              <div key={nombre} className="relative flex flex-col items-center "
+              >
                 <div
                   ref={refs.current[nombre].imageRef}
                   className="opacity-0 pointer-events-none absolute bottom-full mb-2 transition-all duration-500 ease-in-out flex flex-col items-center"

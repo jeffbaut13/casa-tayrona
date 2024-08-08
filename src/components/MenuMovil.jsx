@@ -24,6 +24,7 @@ const Menu = ({
   audioRef,
   handleShowReserva,
 }) => {
+  const containerRef = useRef(null);
   const refs = useRef(
     nombres.reduce((acc, value) => {
       acc[value] = {
@@ -70,14 +71,16 @@ const Menu = ({
         },
       });
 
-      // Desplazar automáticamente para centrar el botón
-      setTimeout(() => {
-        buttonRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-          inline: "center",
-        });
-      }, start * 1000); // start está en segundos, convertimos a milisegundos
+      // Desplazamiento suavizado del contenedor para centrar el botón
+      gsap.to(containerRef.current, {
+        scrollLeft:
+          buttonRef.current.offsetLeft -
+          containerRef.current.clientWidth / 2 +
+          buttonRef.current.clientWidth / 2,
+        duration: 1.5,
+        ease: "power3.inOut",
+        delay: start,
+      });
     };
 
     const video = document.querySelector("video");
@@ -114,7 +117,8 @@ const Menu = ({
       className="fixed bottom-20 left-0 w-full text-[--bg] transition-colors duration-500 ease-out z-[51] overflow-hidden"
     >
       <div
-        className="flex justify-center pt-24 pb-4 w-full overflow-x-scroll no-scrollbar"
+        ref={containerRef}
+        className="flex justify-center py-4 w-full overflow-x-scroll no-scrollbar"
       >
         <div className="flex justify-start items-center w-full">
           {nombres.map((nombre) => {
@@ -122,7 +126,7 @@ const Menu = ({
             return (
               <div
                 key={nombre}
-                className="relative flex flex-col items-center min-w-[100vw]" // ancho mínimo igual al ancho de la pantalla
+                className="relative flex flex-col items-center min-w-[100vw]"
               >
                 <div
                   ref={refs.current[nombre].imageRef}
