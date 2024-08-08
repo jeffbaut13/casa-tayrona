@@ -23,6 +23,10 @@
     font-style: normal;
     src: url("./fonts/Blacker-Display-Regular-trial.ttf");
   }
+  @font-face {
+    font-family: "Bodoni";
+    src: url("./fonts/bodoni-72-book.ttf");
+  }
 }
 .blackerMedium {
   font-family: "Blacker Medium";
@@ -39,6 +43,9 @@
 .blackerBold {
   font-family: "Blacker Bold";
   font-weight: 700;
+}
+.numeros {
+  font-family: "Bodoni";
 }
 
 :root {
