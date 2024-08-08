@@ -24,7 +24,6 @@ const Menu = ({
   audioRef,
   handleShowReserva,
 }) => {
-  const containerRef = useRef(null);
   const refs = useRef(
     nombres.reduce((acc, value) => {
       acc[value] = {
@@ -37,8 +36,6 @@ const Menu = ({
 
   useEffect(() => {
     const showImage = (imageRef, start, sumaTotal, buttonRef) => {
-      const buttonIndex = nombres.indexOf(buttonRef.current.innerText);
-
       gsap.to(imageRef.current, {
         opacity: 1,
         pointerEvents: "all",
@@ -73,17 +70,14 @@ const Menu = ({
         },
       });
 
-      // Centrar el botón actualmente activo
-      const containerWidth = containerRef.current.offsetWidth;
-      const buttonWidth = buttonRef.current.offsetWidth;
-      const offsetX = buttonRef.current.offsetLeft - (containerWidth / 2) + (buttonWidth / 2);
-      
-      gsap.to(containerRef.current, {
-        x: -offsetX,
-        duration: 1.5,
-        ease: "easeInOut",
-        delay: start,
-      });
+      // Desplazar automáticamente para centrar el botón
+      setTimeout(() => {
+        buttonRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "center",
+        });
+      }, start * 1000); // start está en segundos, convertimos a milisegundos
     };
 
     const video = document.querySelector("video");
@@ -120,8 +114,7 @@ const Menu = ({
       className="fixed bottom-20 left-0 w-full text-[--bg] transition-colors duration-500 ease-out z-[51] overflow-hidden"
     >
       <div
-        ref={containerRef}
-        className="flex justify-center py-4 w-full overflow-x-scroll no-scrollbar"
+        className="flex justify-center pt-24 pb-4 w-full overflow-x-scroll no-scrollbar"
       >
         <div className="flex justify-start items-center w-full">
           {nombres.map((nombre) => {
@@ -129,7 +122,7 @@ const Menu = ({
             return (
               <div
                 key={nombre}
-                className="relative flex flex-col items-center min-w-[100vw]"  // ancho minimo igual al ancho de la pantalla
+                className="relative flex flex-col items-center min-w-[100vw]" // ancho mínimo igual al ancho de la pantalla
               >
                 <div
                   ref={refs.current[nombre].imageRef}
