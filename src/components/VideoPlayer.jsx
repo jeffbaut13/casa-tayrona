@@ -1,11 +1,13 @@
 import React, { useRef, useEffect, useState } from "react";
 import Menu from "./Menu";
+import MenuMovil from "./MenuMovil";
 import Tarjeta from "./Tarjeta";
 import data from "../assets/data";
 import { LogoImagen } from "./loader/LogoImagen";
 import Reserva from "../components/Reservas";
 import AudioPlayer from "./audio/AudioPlayer";
 import audioMusic from "../assets/audioMusic.mp3";
+import { useMediaQuery } from 'react-responsive';
 import "../react-datepicker.css";
 
 const VideoPlayer = ({
@@ -20,6 +22,9 @@ const VideoPlayer = ({
   const videoRef = useRef(null);
   const [showTarjeta, setShowTarjeta] = useState(false);
   const [showReserva, setShowReserva] = useState(false);
+
+  // Detectar si la pantalla es móvil
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
   useEffect(() => {
     if (play) {
@@ -59,14 +64,25 @@ const VideoPlayer = ({
         handleClickAudio={handleClickAudio}
         active={true}
       />
-      
-      <Menu
-        audioRef={audioRef}
-        handleShowReserva={handleShowReserva}
-        onButtonClick={handleShowTarjeta}
-        isPlaying={isPlaying}
-        handleClickAudio={handleClickAudio}
-      />
+
+      {/* Renderiza Menu para escritorio y MenuMovil para móviles */}
+      {isMobile ? (
+        <MenuMovil
+          audioRef={audioRef}
+          handleShowReserva={handleShowReserva}
+          onButtonClick={handleShowTarjeta}
+          isPlaying={isPlaying}
+          handleClickAudio={handleClickAudio}
+        />
+      ) : (
+        <Menu
+          audioRef={audioRef}
+          handleShowReserva={handleShowReserva}
+          onButtonClick={handleShowTarjeta}
+          isPlaying={isPlaying}
+          handleClickAudio={handleClickAudio}
+        />
+      )}
 
       {showReserva && <Reserva onClose={handleHideReserva} />}
       
@@ -75,7 +91,7 @@ const VideoPlayer = ({
       <video
         ref={videoRef}
         src={videoSrc}
-        className="w-full z-0"
+        className="absolute top-0 left-0 w-full h-full object-cover"
         loop
         muted
         playsInline

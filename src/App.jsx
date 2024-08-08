@@ -40,6 +40,7 @@ const App = () => {
         play={play}
         isPlaying={isPlaying}
         handleClickAudio={handleClickAudio}
+        
       />
     </>
   );
