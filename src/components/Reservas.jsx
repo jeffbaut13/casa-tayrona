@@ -43,7 +43,7 @@ const Reserva = ({ onClose }) => {
   };
 
   return (
-    <div className="absolute w-full h-full bg-white bg-opacity-20 backdrop-blur-2xl z-[55]">
+    <div className="absolute w-full h-full helvetbold bg-white bg-opacity-20 backdrop-blur-2xl z-[55]">
       <div className="absolute inset-0 flex justify-center items-center w-full z-50">
         <figure
           onClick={onClose}
@@ -70,30 +70,30 @@ const Reserva = ({ onClose }) => {
                   <h1 className="mb-2 text-2xl">Precio</h1>
                   <p className="flex justify-between text-xs">
                     <span>
-                      <span className="numeros p-0 m-0">$2,500 USD</span> <span className="p-0 m-0">x <span className="numeros">4</span> noches</span>
+                      <span className=" helvetLight p-0 m-0">$2,500 USD</span> <span className="p-0 m-0">x <span className="helvetLight">4</span> noches</span>
                     </span>
-                    <span className="numeros">$10,000 USD</span>
+                    <span className="helvetLight">$10,000 USD</span>
                   </p>
                   <p className="flex justify-between text-xs">
                     <span>Oferta especial</span>
-                    <span className="numeros">-$500 USD</span>
+                    <span className="helvetLight">-$500 USD</span>
                   </p>
                   <p className="flex justify-between text-xs">
                     <span>Transporte personalizado</span>
-                    <span className="numeros">$200 USD</span>
+                    <span className="helvetLight">$200 USD</span>
                   </p>
                 </div>
                 <div className="pt-4">
                   <p className="flex justify-between text-xl">
                     <span className="text-2xl">Total</span>
-                    <span className="numeros">$9,200 USD</span>
+                    <span className="helvetLight">$9,200 USD</span>
                   </p>
                 </div>
               </div>
 
               <div className="w-full items-center justify-center flex border-t border-gray-600 pt-4 mt-4">
                 <span className="text-center text-xl text-gray-600">
-                  Reserva ahora y ahorra un <span className="numeros">5%</span>
+                  Reserva ahora y ahorra un <span className="helvetLight">5%</span>
                 </span>
               </div>
               <p className="text-[8px] text-gray-600 mt-2 border border-gray-600 p-4 rounded-lg flex flex-col items-center">
@@ -191,7 +191,7 @@ const Reserva = ({ onClose }) => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex flex-col items-center">
                   <span className="font-bold">Adultos</span>
-                  <span className="text-xs">(<span className="numeros">13</span> años en adelante)</span>
+                  <span className="text-xs">(<span className="helvetLight">13</span> años en adelante)</span>
                   <div className="flex items-center mt-2">
                     <button
                       onClick={() => setAdults(Math.max(0, adults - 1))}
@@ -199,7 +199,7 @@ const Reserva = ({ onClose }) => {
                     >
                       −
                     </button>
-                    <span className="mx-4 numeros">{adults}</span>
+                    <span className="mx-4 helvetLight">{adults}</span>
                     <button
                       onClick={() => setAdults(adults + 1)}
                       className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-md"
@@ -210,7 +210,7 @@ const Reserva = ({ onClose }) => {
                 </div>
                 <div className="flex flex-col items-center">
                   <span className="font-bold">Niños</span>
-                  <span className="text-xs">(De<span className="numeros"> 2</span> a <span className="numeros">12</span> años)</span>
+                  <span className="text-xs">(De<span className="helvetLight"> 2</span> a <span className="helvetLight">12</span> años)</span>
                   <div className="flex items-center mt-2">
                     <button
                       onClick={() => setChildren(Math.max(0, children - 1))}
@@ -218,7 +218,7 @@ const Reserva = ({ onClose }) => {
                     >
                       −
                     </button>
-                    <span className="mx-4 numeros">{children}</span>
+                    <span className="mx-4 helvetLight">{children}</span>
                     <button
                       onClick={() => setChildren(children + 1)}
                       className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-md"
@@ -229,7 +229,7 @@ const Reserva = ({ onClose }) => {
                 </div>
                 <div className="flex flex-col items-center">
                   <span className="font-bold">Bebés</span>
-                  <span className="text-xs">(Hasta <span className="numeros">2</span> años)</span>
+                  <span className="text-xs">(Hasta <span className="helvetLight">2</span> años)</span>
                   <div className="flex items-center mt-2">
                     <button
                       onClick={() => setInfants(Math.max(0, infants - 1))}
@@ -237,7 +237,7 @@ const Reserva = ({ onClose }) => {
                     >
                       −
                     </button>
-                    <span className="mx-4 numeros">{infants}</span>
+                    <span className="mx-4 helvetLight">{infants}</span>
                     <button
                       onClick={() => setInfants(infants + 1)}
                       className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-md"
@@ -255,7 +255,7 @@ const Reserva = ({ onClose }) => {
                     >
                       −
                     </button>
-                    <span className="mx-4 numeros">{pets}</span>
+                    <span className="mx-4 helvetLight">{pets}</span>
                     <button
                       onClick={() => setPets(pets + 1)}
                       className="bg-[#EDE9DD] w-8 h-8 flex items-center justify-center rounded-md"

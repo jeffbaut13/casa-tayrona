@@ -27,6 +27,20 @@
     font-family: "Bodoni";
     src: url("./fonts/bodoni-72-book.ttf");
   }
+  @font-face {
+    font-family: "Helvetica Light";
+    src: url("./fonts/helvetica.ttf");
+  }
+  @font-face {
+    font-family: "Helvetica Bold";
+    src: url("./fonts/helvetica-bold.ttf");
+  }
+}
+.helvetLight{
+  font-family: "Helvetica Light";
+}
+.helvetBold{
+  font-family: "Helvetica Bold";
 }
 .blackerMedium {
   font-family: "Blacker Medium";

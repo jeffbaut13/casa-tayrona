@@ -1,9 +1,6 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import data from "../assets/data";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const tiempo = [
   { Terraza: [4, 10] },
@@ -17,13 +14,7 @@ const tiempo = [
 
 const nombres = tiempo.map((obj) => Object.keys(obj)[0]);
 
-const Menu = ({
-  onButtonClick,
-  isPlaying,
-  handleClickAudio,
-  audioRef,
-  handleShowReserva,
-}) => {
+const Menu = ({ onButtonClick }) => {
   const containerRef = useRef(null);
   const refs = useRef(
     nombres.reduce((acc, value) => {
@@ -37,6 +28,7 @@ const Menu = ({
 
   useEffect(() => {
     const showImage = (imageRef, start, sumaTotal, buttonRef) => {
+      // Mostrar la imagen con gsap
       gsap.to(imageRef.current, {
         opacity: 1,
         pointerEvents: "all",
@@ -52,6 +44,7 @@ const Menu = ({
         },
       });
 
+      // Aplicar animación al botón
       gsap.to(buttonRef.current, {
         scale: 1.8,
         duration: 1.5,
@@ -71,15 +64,11 @@ const Menu = ({
         },
       });
 
-      // Desplazamiento suavizado del contenedor para centrar el botón
-      gsap.to(containerRef.current, {
-        scrollLeft:
-          buttonRef.current.offsetLeft -
-          containerRef.current.clientWidth / 2 +
-          buttonRef.current.clientWidth / 2,
-        duration: 1.5,
-        ease: "power3.inOut",
-        delay: start,
+      // Hacer que el botón se desplace al centro de la vista
+      buttonRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center",
       });
     };
 
@@ -118,7 +107,7 @@ const Menu = ({
     >
       <div
         ref={containerRef}
-        className="flex justify-center py-4 w-full overflow-x-scroll no-scrollbar"
+        className="flex justify-center pt-28 pb-4 w-full no-scrollbar"
       >
         <div className="flex justify-start items-center w-full">
           {nombres.map((nombre) => {

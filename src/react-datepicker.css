@@ -38,6 +38,7 @@
   
   .react-datepicker__day:hover {
     background-color: #eee;
+    color: #333;
   }
   
   .react-datepicker__navigation--previous,

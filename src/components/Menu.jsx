@@ -56,6 +56,7 @@ const Menu = ({
         delay: start,
         opacity: 1,
         color: "white",
+        width: "200px",
 
         onComplete: () => {
           gsap.to(buttonRef.current, {
@@ -64,6 +65,7 @@ const Menu = ({
             ease: "easeInOut",
             delay: sumaTotal - start,
             color: "white",
+            width: "50px",
           });
         },
       });
