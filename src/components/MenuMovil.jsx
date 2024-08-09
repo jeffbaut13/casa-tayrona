@@ -46,7 +46,6 @@ const Menu = ({ onButtonClick }) => {
 
       // Aplicar animación al botón
       gsap.to(buttonRef.current, {
-        scale: 1.8,
         duration: 1.5,
         ease: "easeInOut",
         delay: start,
@@ -54,7 +53,6 @@ const Menu = ({ onButtonClick }) => {
         color: "white",
         onComplete: () => {
           gsap.to(buttonRef.current, {
-            scale: 1,
             duration: 3,
             opacity: 0.4,
             ease: "easeInOut",
@@ -107,7 +105,7 @@ const Menu = ({ onButtonClick }) => {
     >
       <div
         ref={containerRef}
-        className="flex justify-center pt-28 pb-4 w-full no-scrollbar"
+        className="flex justify-center pt-28 pb-8 w-full no-scrollbar"
       >
         <div className="flex justify-start items-center w-full">
           {nombres.map((nombre) => {
