@@ -23,6 +23,12 @@
     margin: 0.166rem;
     color: #333;
   }
+  @media (max-width: 600px){
+    .react-datepicker__day-name,
+  .react-datepicker__day {
+    width: 45px;
+  }
+  }
   
   .react-datepicker__day--selected,
   .react-datepicker__day--in-range,

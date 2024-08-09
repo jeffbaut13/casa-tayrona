@@ -44,14 +44,14 @@ const Reserva = ({ onClose }) => {
 
   return (
     <div className="absolute w-full h-full helvetbold bg-white bg-opacity-20 backdrop-blur-2xl z-[55]">
-      <div className="absolute inset-0 flex justify-center items-center w-full z-50 p-4 sm:p-0">
+      <div className="absolute inset-0 flex justify-center items-center w-full z-50 p-4 sm:p-0 overflow-y-auto">
         <figure
           onClick={onClose}
           className="cursor-pointer absolute right-4 top-4 w-10 h-16 rotate-180 z-20"
         >
           <img src="/imagenes-tarjetas/cerrargaleria.svg" alt="Cerrar" />
         </figure>
-        <div className="w-full sm:w-[60%] h-auto sm:h-[70%] text-gray-600 flex flex-col sm:flex-row bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="w-full sm:w-[60%] h-auto sm:h-[70%] text-gray-600 flex flex-col sm:flex-row md:mt-0 mt-40 bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="w-full sm:w-1/2 px-6 sm:px-20 py-8">
             <h1 className="text-xl sm:text-2xl font-bold mb-2">Confirma y paga</h1>
             <div className="md:mb-4">
@@ -196,7 +196,7 @@ const Reserva = ({ onClose }) => {
                     >
                       -
                     </button>
-                    <span className="px-4">{adults}</span>
+                    <span className="px-4 helvetLight">{adults}</span>
                     <button
                       onClick={() => setAdults(adults + 1)}
                       className="px-2 py-1 border rounded-r"
@@ -214,7 +214,7 @@ const Reserva = ({ onClose }) => {
                     >
                       -
                     </button>
-                    <span className="px-4">{children}</span>
+                    <span className="px-4 helvetLight">{children}</span>
                     <button
                       onClick={() => setChildren(children + 1)}
                       className="px-2 py-1 border rounded-r"
@@ -232,7 +232,7 @@ const Reserva = ({ onClose }) => {
                     >
                       -
                     </button>
-                    <span className="px-4">{infants}</span>
+                    <span className="px-4 helvetLight">{infants}</span>
                     <button
                       onClick={() => setInfants(infants + 1)}
                       className="px-2 py-1 border rounded-r"
@@ -250,7 +250,7 @@ const Reserva = ({ onClose }) => {
                     >
                       -
                     </button>
-                    <span className="px-4">{pets}</span>
+                    <span className="px-4 helvetLight">{pets}</span>
                     <button
                       onClick={() => setPets(pets + 1)}
                       className="px-2 py-1 border rounded-r"
