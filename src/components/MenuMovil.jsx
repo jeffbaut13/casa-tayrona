@@ -152,12 +152,13 @@ const Menu = ({ onButtonClick }) => {
                       </span>
                     ))}
                 </button>
+                <div className="w-[70%] border-t-2 border-[--bg] opacity-40 mx-auto mt-4"></div>
+
               </div>
             );
           })}
         </div>
       </div>
-      <div className="w-[70%] border-t-2 border-[--bg] opacity-40 mx-auto mt-0"></div>
     </div>
   );
 };
