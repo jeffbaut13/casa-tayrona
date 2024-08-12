@@ -67,7 +67,7 @@ const Reserva = ({ onClose }) => {
         >
           <img src="/imagenes-tarjetas/cerrargaleria.svg" alt="Cerrar" />
         </figure>
-        <div className="w-full sm:w-[60%] h-auto sm:h-[70%]  text-gray-600 flex flex-col sm:flex-row md:mt-0 mt-40 bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="w-full sm:w-[60%] h-auto sm:h-[70%]  text-gray-600 flex flex-col sm:flex-row md:mt-0 mt-60 bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="w-full sm:w-1/2 px-6 sm:px-20 py-8 flex flex-col justify-center centrarVertical">
             <h1 className="text-xl sm:text-2xl font-bold mb-2">Confirma y paga</h1>
             <div className="md:mb-4">
