@@ -33,6 +33,8 @@ const Reserva = ({ onClose }) => {
   const handleDateChange = (date) => {
     if (isStartDatePicker) {
       setStartDate(date);
+      // Cambia automáticamente al calendario de salida
+      setIsStartDatePicker(false);
     } else {
       setEndDate(date);
     }
@@ -40,6 +42,20 @@ const Reserva = ({ onClose }) => {
 
   const handleDatePickerToggle = (isStart) => {
     setIsStartDatePicker(isStart);
+  };
+
+  const handleAcceptDates = () => {
+    const fechaInicio = startDate ? startDate.toLocaleDateString() : "Fecha de inicio no seleccionada";
+    const fechaFin = endDate ? endDate.toLocaleDateString() : "Fecha de fin no seleccionada";
+    document.getElementById("fechas").innerText = `Llegada: ${fechaInicio} - Salida: ${fechaFin}`;
+    handleHideDateModal();
+  };
+
+  const handleAcceptGuests = () => {
+    // Actualiza el texto en el elemento con id="huespedes"
+    const guestsText = `${adults} Adultos, ${children} Niños, ${infants} Bebés, ${pets} Mascotas`;
+    document.getElementById("huespedes").innerText = guestsText;
+    setShowGuestsModal(false);
   };
 
   return (
@@ -51,18 +67,18 @@ const Reserva = ({ onClose }) => {
         >
           <img src="/imagenes-tarjetas/cerrargaleria.svg" alt="Cerrar" />
         </figure>
-        <div className="w-full sm:w-[60%] h-auto sm:h-[70%] text-gray-600 flex flex-col sm:flex-row md:mt-0 mt-40 bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="w-full sm:w-1/2 px-6 sm:px-20 py-8">
+        <div className="w-full sm:w-[60%] h-auto sm:h-[70%]  text-gray-600 flex flex-col sm:flex-row md:mt-0 mt-40 bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="w-full sm:w-1/2 px-6 sm:px-20 py-8 flex flex-col justify-center centrarVertical">
             <h1 className="text-xl sm:text-2xl font-bold mb-2">Confirma y paga</h1>
             <div className="md:mb-4">
               <h2 className="text-xl sm:text-2xl font-semibold">Tu viaje</h2>
               <div className="flex justify-between items-center mb-2">
-                <p className="text-xs">Escoge las fechas de tu viaje</p>
+                <p className="text-xs helvetLight" id="fechas">Escoge las fechas de tu viaje</p>
                 <button onClick={handleShowDateModal} className="text-blue-600 text-sm">Editar</button>
               </div>
               <h2 className="text-xl sm:text-2xl font-semibold">Huéspedes</h2>
               <div className="flex justify-between items-center">
-                <p className="text-xs">¿Con quién viajas?</p>
+                <p className="text-xs helvetLight" id="huespedes">¿Con quién viajas?</p>
                 <button onClick={handleShowGuestsModal} className="text-blue-600 text-sm">Editar</button>
               </div>
               <div className="py-1">
@@ -96,7 +112,7 @@ const Reserva = ({ onClose }) => {
                   Reserva ahora y ahorra un <span className="helvetLight">5%</span>
                 </span>
               </div>
-              <p className="text-[10px] sm:text-[8px] text-gray-600 mt-2 border border-gray-600 p-2 sm:p-4 rounded-lg flex flex-col items-center">
+              <p className="text-[10px] sm:text-[10px] text-gray-600 mt-2 border border-gray-600 p-2 sm:p-2 rounded-lg flex flex-col items-center">
                 <span>Kasa Paraíso Tayrona ofrece un descuento único para las fechas</span>
                 <span>de tu viaje. Reserva pronto para aprovechar esta oferta especial.</span> 
               </p>
@@ -167,8 +183,8 @@ const Reserva = ({ onClose }) => {
                   Restablecer
                 </button>
                 <button
-                  onClick={handleHideDateModal}
-                  className="bg-black text-white px-4 py-1 rounded"
+                  onClick={handleAcceptDates}
+                  className="bg-[#F0E3CE] text-[#515151] px-4 py-2 rounded-md"
                 >
                   Aceptar
                 </button>
@@ -177,111 +193,82 @@ const Reserva = ({ onClose }) => {
           </div>
         )}
         {showGuestsModal && (
-          <div className="absolute w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50 p-4 sm:p-0">
-            <div className="bg-[#FFFDF8] text-gray-500 px-8 sm:px-16 py-8 rounded-lg shadow-lg relative w-full sm:w-[520px] h-auto mx-auto">
-              <button
-                onClick={handleHideGuestsModal}
-                className="absolute top-4 right-4 text-gray-500 hover:text-black"
-              >
-                &times;
-              </button>
-              <h1 className="text-xl sm:text-2xl text-center mb-4">¿Quiénes viajan?</h1>
-              <div className="space-y-4">
-                <div className="flex justify-between">
-                  <span>Adultos</span>
-                  <div className="flex items-center">
-                    <button
-                      onClick={() => setAdults(Math.max(adults - 1, 0))}
-                      className="px-2 py-1 border rounded-l"
-                    >
-                      -
-                    </button>
-                    <span className="px-4 helvetLight">{adults}</span>
-                    <button
-                      onClick={() => setAdults(adults + 1)}
-                      className="px-2 py-1 border rounded-r"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-                <div className="flex justify-between">
-                  <span>Niños</span>
-                  <div className="flex items-center">
-                    <button
-                      onClick={() => setChildren(Math.max(children - 1, 0))}
-                      className="px-2 py-1 border rounded-l"
-                    >
-                      -
-                    </button>
-                    <span className="px-4 helvetLight">{children}</span>
-                    <button
-                      onClick={() => setChildren(children + 1)}
-                      className="px-2 py-1 border rounded-r"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-                <div className="flex justify-between">
-                  <span>Bebés</span>
-                  <div className="flex items-center">
-                    <button
-                      onClick={() => setInfants(Math.max(infants - 1, 0))}
-                      className="px-2 py-1 border rounded-l"
-                    >
-                      -
-                    </button>
-                    <span className="px-4 helvetLight">{infants}</span>
-                    <button
-                      onClick={() => setInfants(infants + 1)}
-                      className="px-2 py-1 border rounded-r"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-                <div className="flex justify-between">
-                  <span>Mascotas</span>
-                  <div className="flex items-center">
-                    <button
-                      onClick={() => setPets(Math.max(pets - 1, 0))}
-                      className="px-2 py-1 border rounded-l"
-                    >
-                      -
-                    </button>
-                    <span className="px-4 helvetLight">{pets}</span>
-                    <button
-                      onClick={() => setPets(pets + 1)}
-                      className="px-2 py-1 border rounded-r"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div className="flex justify-between mt-4">
-                <button
-                  onClick={() => {
-                    setAdults(0);
-                    setChildren(0);
-                    setInfants(0);
-                    setPets(0);
-                  }}
-                  className="text-gray-500"
-                >
-                  Restablecer
-                </button>
-                <button
-                  onClick={handleHideGuestsModal}
-                  className="bg-black text-white px-4 py-1 rounded"
-                >
-                  Aceptar
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+             <div className="absolute w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50 p-4 sm:p-0">
+             <div className="bg-[#FFFDF8] p-8 rounded-lg shadow-lg relative w-full sm:w-[500px] h-auto mx-auto">
+               <div className="text-[#515151] flex flex-col items-center py-4">
+                 <h1 className="text-xl sm:text-2xl">Huéspedes</h1>
+                 <p className="text-xs">Ingresa la cantidad de personas que viajarán contigo.</p>
+               </div>
+               <button
+                 onClick={() => setShowGuestsModal(false)}
+                 className="absolute top-4 right-4 text-gray-500 hover:text-black"
+               >
+                 &times;
+               </button>
+               <div className="grid grid-cols-2 gap-4 mb-4 text-gray-500 helvetLight">
+                 <div className="flex flex-col items-center">
+                   <span>Adultos <small>(13 años en adelante)</small></span>
+                   <div className="flex items-center mt-2">
+                     <button onClick={() => setAdults(adults - 1)} disabled={adults === 0} className=" bg-[--bg] px-2">
+                       -
+                     </button>
+                     <span className="mx-2 helvetLight">{adults}</span>
+                     <button onClick={() => setAdults(adults + 1)} className=" bg-[--bg] px-2">+</button>
+                   </div>
+                 </div>
+                 <div className="flex flex-col items-center helvetLight">
+                   <span>Niños <small>(De 2 a 12 años)</small></span>
+                   <div className="flex items-center mt-2">
+                     <button onClick={() => setChildren(children - 1)} disabled={children === 0} className=" bg-[--bg] px-2">
+                       -
+                     </button>
+                     <span className="mx-2">{children}</span>
+                     <button onClick={() => setChildren(children + 1)} className=" bg-[--bg] px-2">+</button>
+                   </div>
+                 </div>
+                 <div className="flex flex-col items-center helvetLight">
+                   <span>Bebés <small>(Hasta 2 años)</small></span>
+                   <div className="flex items-center mt-2">
+                     <button onClick={() => setInfants(infants - 1)} disabled={infants === 0} className=" bg-[--bg] px-2">
+                       -
+                     </button>
+                     <span className="mx-2">{infants}</span>
+                     <button onClick={() => setInfants(infants + 1)} className=" bg-[--bg] px-2">+</button>
+                   </div>
+                 </div>
+                 <div className="flex flex-col items-center helvetLight">
+                   <span>Mascotas</span>
+                   <div className="flex items-center mt-2">
+                     <button onClick={() => setPets(pets - 1)} disabled={pets === 0} className=" bg-[--bg] px-2">
+                       -
+                     </button>
+                     <span className="mx-2">{pets}</span>
+                     <button onClick={() => setPets(pets + 1)} className=" bg-[--bg] px-2">+</button>
+                   </div>
+                 </div>
+               </div>
+               <div className="flex justify-between">
+                 <button
+                   onClick={() => {
+                     setAdults(0);
+                     setChildren(0);
+                     setInfants(0);
+                     setPets(0);
+                   }}
+                   className="text-gray-500"
+                 >
+                   Restablecer
+                 </button>
+                 <button
+                   onClick={handleAcceptGuests}
+                   className="bg-[#000000] text-white px-4 py-2 rounded-md"
+                 >
+                   Aceptar
+                 </button>
+               </div>
+             </div>
+           </div>
+            )}
       </div>
     </div>
   );
