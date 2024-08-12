@@ -63,7 +63,7 @@ const Reserva = ({ onClose }) => {
       <div className="absolute inset-0 flex justify-center items-center w-full z-50 p-4 sm:p-0 overflow-y-auto">
         <figure
           onClick={onClose}
-          className="cursor-pointer absolute right-4 top-4 w-10 h-16 rotate-180 z-20"
+          className="cursor-pointer absolute right-4 top-4 w-8 h-16 rotate-180 z-20"
         >
           <img src="/imagenes-tarjetas/cerrargaleria.svg" alt="Cerrar" />
         </figure>
